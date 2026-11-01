@@ -4,6 +4,9 @@ on:
     - cron: "30 3 * * *"    # 09:00 IST
     - cron: "30 12 * * *"   # 18:00 IST
   workflow_dispatch:
+  workflow_run:
+    workflows: [backfill-history]
+    types: [completed]
   push:
     branches: [main]
     paths: ["scripts/**", ".github/workflows/prices.yml", "site/**"]
