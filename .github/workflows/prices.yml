@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir -p _site
           cp data/prices.json data/history.json _site/
-          cp site/index.html _site/
+          cp site/* _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
