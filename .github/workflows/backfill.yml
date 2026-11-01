@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: prices
+  group: backfill
   cancel-in-progress: false
 jobs:
   backfill:

@@ -1,4 +1,4 @@
-"""One-off: load about a year of history into data/history.json.
+"""One-off: load about a year of history into data/history.json (re-runnable; sections with history are skipped).
 
 Coffee: Coffee Board market-report archive (month page -> day page -> PDF).
 Pepper: Spices Board current-market-price table filtered by date.
