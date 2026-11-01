@@ -1,2 +1,3 @@
 # commodity-prices
-Coffee, Cardamom and Pepper prices consolidation
+
+Daily coffee, pepper and cardamom prices from official sources (Coffee Board of India, Spices Board of India), published as data for endemicgreens.com.
