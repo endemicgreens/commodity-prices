@@ -173,18 +173,35 @@ def parse_cardamom(page):
     return {"date": latest, "unit": "Rs per kg", "auctions": auctions, "weighted_average": wavg}
 
 
-def parse_pepper(page):
+def pepper_rows(page):
     rows = table_rows(page, "Current Market Price of Key Spices")
     out = []
     for c in rows:
-        if len(c) >= 9 and c[1].lower() == "pepper" and re.match(r"\d{2}-[A-Z][a-z]{2}-\d{4}$", c[0]):
+        if len(c) >= 9 and c[1].lower() in ("pepper", "black pepper") and re.match(r"\d{2}-[A-Z][a-z]{2}-\d{4}$", c[0]):
+            grade = c[4] if c[4] not in ("-", "") else ""
+            if c[2].lower() == "cochin" and grade not in ("Garbled", "Ungarbled"):
+                continue  # odd one-off rows (e.g. misfiled grades)
+            if c[2].lower() == "cochin" and c[5] != "IPSTA":
+                continue  # keep one consistent source for Kochi
             p = {"date": to_iso(c[0], "%d-%b-%Y"), "market": c[2].title(), "state": c[3].title(),
-                 "grade": c[4], "source": c[5], "min": num(c[6]), "max": num(c[7]), "avg": num(c[8])}
+                 "grade": grade, "source": c[5], "min": num(c[6]), "max": num(c[7]), "avg": num(c[8])}
+            if not p["avg"] and p["min"] and p["max"]:
+                p["avg"] = round((p["min"] + p["max"]) / 2, 2)
             check(p["avg"] and 100 <= p["avg"] <= 5000, f"Pepper price out of range: {p}")
             out.append(p)
+    return out
+
+
+def parse_pepper(page):
+    out = pepper_rows(page)
     check(out, "No pepper rows found")
-    latest = max(p["date"] for p in out)
-    return {"date": latest, "unit": "Rs per kg", "markets": [p for p in out if p["date"] == latest]}
+    latest = {}
+    for p in out:  # latest row for each market and grade
+        k = (p["market"], p["grade"])
+        if k not in latest or p["date"] > latest[k]["date"]:
+            latest[k] = p
+    markets = sorted(latest.values(), key=lambda p: (p["market"] != "Cochin", p["market"], p["grade"]))
+    return {"date": max(p["date"] for p in markets), "unit": "Rs per kg", "markets": markets}
 
 
 # ---------------------------------------------------------------- main
@@ -203,6 +220,18 @@ def load(path, default):
         return default
 
 
+def pepper_key(m):
+    return (m["market"] + ("_" + m["grade"] if m["grade"] else "")).lower()
+
+
+def add_pepper_point(series, m):
+    rec = next((r for r in series if r["date"] == m["date"]), None)
+    if rec is None:
+        rec = {"date": m["date"]}
+        series.append(rec)
+    rec[pepper_key(m)] = m["avg"]
+
+
 def update_history(hist, name, data):
     series = hist.setdefault(name, [])
     if name == "coffee":
@@ -214,8 +243,11 @@ def update_history(hist, name, data):
         key = data["date"]
         rec = {"date": key, "weighted_average": data["weighted_average"]}
     else:
-        key = data["date"]
-        rec = {"date": key, **{f'{m["market"]}_{m["grade"]}'.lower(): m["avg"] for m in data["markets"]}}
+        for m in data["markets"]:
+            add_pepper_point(series, m)
+        series.sort(key=lambda r: r["date"])
+        del series[:-500]
+        return
     series[:] = [r for r in series if r["date"] != key] + [rec]
     series.sort(key=lambda r: r["date"])
     del series[:-500]
