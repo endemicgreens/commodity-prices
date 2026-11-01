@@ -1,237 +1,166 @@
 pepper rows: 559 dates: 273
-cardamom dates: 0 pages read: 1
+cardamom FAILED ValueError could not convert string to float: '3169.59.00'
 coffee month 2025-10 days 18
-  skip 2025,Oct,03 SourceError Coffee report date not found
-  skip 2025,Oct,06 SourceError Coffee report date not found
-  skip 2025,Oct,07 SourceError Coffee report date not found
-  skip 2025,Oct,08 SourceError Coffee report date not found
-  skip 2025,Oct,09 SourceError Coffee report date not found
-  skip 2025,Oct,10 SourceError Coffee report date not found
-  skip 2025,Oct,13 SourceError Coffee report date not found
-  skip 2025,Oct,14 SourceError Coffee report date not found
-  skip 2025,Oct,15 SourceError Coffee report date not found
-  skip 2025,Oct,17 SourceError Coffee report date not found
-  skip 2025,Oct,21 SourceError Coffee report date not found
-  skip 2025,Oct,23 SourceError Coffee report date not found
-  skip 2025,Oct,24 SourceError Coffee report date not found
-  skip 2025,Oct,27 SourceError Coffee report date not found
-  skip 2025,Oct,28 SourceError Coffee report date not found
-  skip 2025,Oct,29 SourceError Coffee report date not found
-  skip 2025,Oct,30 SourceError Coffee report date not found
-  skip 2025,Oct,31 SourceError Coffee report date not found
 coffee month 2025-11 days 13
-  skip 2025,Nov,11 SourceError Coffee report date not found
-  skip 2025,Nov,12 SourceError Coffee report date not found
-  skip 2025,Nov,13 SourceError Coffee report date not found
-  skip 2025,Nov,14 SourceError Coffee report date not found
-  skip 2025,Nov,17 SourceError Coffee report date not found
-  skip 2025,Nov,18 SourceError Coffee report date not found
-  skip 2025,Nov,19 SourceError Coffee report date not found
-  skip 2025,Nov,20 SourceError Coffee report date not found
-  skip 2025,Nov,21 SourceError Coffee report date not found
-  skip 2025,Nov,24 SourceError Coffee report date not found
-  skip 2025,Nov,25 SourceError Coffee report date not found
-  skip 2025,Nov,26 SourceError Coffee report date not found
-  skip 2025,Nov,28 SourceError Coffee report date not found
 coffee month 2025-12 days 13
-  skip 2025,Dec,01 SourceError Coffee report date not found
-  skip 2025,Dec,02 SourceError Coffee report date not found
-  skip 2025,Dec,03 SourceError Coffee report date not found
-  skip 2025,Dec,04 SourceError Coffee report date not found
-  skip 2025,Dec,08 SourceError Coffee report date not found
-  skip 2025,Dec,09 SourceError Coffee report date not found
-  skip 2025,Dec,10 SourceError Coffee report date not found
-  skip 2025,Dec,15 SourceError Coffee report date not found
-  skip 2025,Dec,16 SourceError Coffee report date not found
-  skip 2025,Dec,17 SourceError Coffee report date not found
-  skip 2025,Dec,22 SourceError Coffee report date not found
-  skip 2025,Dec,29 SourceError Coffee report date not found
-  skip 2025,Dec,31 SourceError Coffee report date not found
+  skip 2025,Dec,17 SourceError Raw price out of range for robusta_cherry: 96000.0-10350.0
+SAMPLE TEXT 2025,Dec,17                                                            COFFEE BOARD: BENGALURU
+                                                 Daily Coffee Market Report Wednesday December, 17 2025
+                                                                               Futures Prices 16.12.2025
+                     ICE (New York)- Arabica Price                                                     ICE (Europe) – Robusta Price
+                                                                                                              US $ / tonne and
+       Month                      US cents / lb                             Rs/Kg           Month                                                                                           Rs/Kg
+                                                                                                            cents / lb in brackets
+    Dec – 2025                         379.30                              755.94                       Jan – 2026                          3935                       (178.49)           355.72
+    Mar – 2026                         352.10                              701.73                       Mar - 2026                          3832                       (173.82)           346.41
+    May - 2026                         336.50                              670.64                       May – 2026                          3763                       (170.69)           340.18
+ICO Group Indicator price on 15.12.2025 and previous price in brackets
+           Other Mild Arabica                          Robusta                                                                                                     Exchange Rate Rs/ US $
+   US Cents/lb            Rs/Kg           US Cents/lb              Rs/Kg
+                                                                                                                                                                                 90.40
+  386.54 (395.47)     770.37 (791.91)    187.99 (191.60)       374.66 (383.67)
+                                                                                Futures Price Trend
+
+
+
+
+                                                                                       Market Analysis
+ ICE Coffee prices extended their two-week-long slide on Tuesday, with arabica falling to a 3-week low and
+ robusta dropping to a 4-month low. ICE March arabica coffee on Tuesday closed down 8.20 US Cents or
+ 2.28% at 352.10US cents. ICE January robusta coffee closed down US $ 107or 2.65% at US $ 3832/ tonne.
+
+
+                                              Ar. Plant. A                               Ar.Chy.AB                            Rob.Pmt.AB                                      Rob.Chy.AB
+      Differentials:
+          2
+                                              NY +12 to 15                              NY -30 to -40                     LIFFE +1000 to +1100                             LIFFE +400 to + 450
+
+                                                 ICTA Auction Prices Rs/Kg as on 11.12.2025 / 2024-25
+                Grade       MNEB  AA                                           PB                  A                    AB               B                  C                 BBB             AAA
+ Arabica Plantation (25-26)  --- 785.00                                      730.00              792.06                 ---            745.50             625.00             550.00            ---
+ Arabica Plantation (24-25)                       ---           ---          720.00              822.00                  ---               ---               ---                 ---           ---
+         Arabica Cherry                           ---           ---              ---                 ---                 ---               ---               ---                 ---           ---
+
+         Grade                                RKR               A               PB                  AA                AB                   B                 C                 BBB            AAA
+    Robusta Parchment                          ---              ---             ---                 ---              437.50                ---               ---                ---            ---
+       Robusta Cherry                           ---             ---              ---                 ---                 ---               ---               ---                 ---           ---
+
+                                                Raw Coffee Price (Karnataka) as on 16.12.2025 in Rs/50 Kg
+          Ar.Pmt                                          Ar.Chy                         Rob.Pmt                                                                            Rob.Chy
+     26000 - 27000                                    13750 - 15300                 16500 - 17000                                                                       96000 - 10350
+
+                                    Export update: From 1st January 2025 to 16th Decemb
 coffee month 2026-01 days 25
-  skip 2026,Jan,01 SourceError Coffee report date not found
-  skip 2026,Jan,05 SourceError Coffee report date not found
-  skip 2026,Jan,06 SourceError Coffee report date not found
-  skip 2026,Jan,08 SourceError Coffee report date not found
-  skip 2026,Jan,09 SourceError Coffee report date not found
-  skip 2026,Jan,12 SourceError Coffee report date not found
-  skip 2026,Jan,15 SourceError Coffee report date not found
-  skip 2026,Jan,19 SourceError Coffee report date not found
-  skip 2026,Jan,21 SourceError Coffee report date not found
-  skip 2026,Jan,22 SourceError Coffee report date not found
-  skip 2026,Jan,01 SourceError Coffee report date not found
-  skip 2026,Jan,05 SourceError Coffee report date not found
-  skip 2026,Jan,06 SourceError Coffee report date not found
-  skip 2026,Jan,06 SourceError Coffee report date not found
-  skip 2026,Jan,07 SourceError Coffee report date not found
-  skip 2026,Jan,12 SourceError Coffee report date not found
-  skip 2026,Jan,14 SourceError Coffee report date not found
-  skip 2026,Jan,19 SourceError Coffee report date not found
-  skip 2026,Jan,20 SourceError Coffee report date not found
-  skip 2026,Jan,21 SourceError Coffee report date not found
-  skip 2026,Jan,22 SourceError Coffee report date not found
-  skip 2026,Jan,26 SourceError Coffee report date not found
-  skip 2026,Jan,27 SourceError Coffee report date not found
-  skip 2026,Jan,29 SourceError Coffee report date not found
-  skip 2026,Jan,30 SourceError Coffee report date not found
 coffee month 2026-02 days 17
-  skip 2026,Feb,02 SourceError Coffee report date not found
-  skip 2026,Feb,03 SourceError Coffee report date not found
-  skip 2026,Feb,04 SourceError Coffee report date not found
-  skip 2026,Feb,12 SourceError Coffee report date not found
-  skip 2026,Feb,06 SourceError Coffee report date not found
-  skip 2026,Feb,11 SourceError Coffee report date not found
-  skip 2026,Feb,05 SourceError Coffee report date not found
-  skip 2026,Feb,13 SourceError Coffee report date not found
-  skip 2026,Feb,17 SourceError Coffee report date not found
-  skip 2026,Feb,18 SourceError Coffee report date not found
-  skip 2026,Feb,19 SourceError Coffee report date not found
-  skip 2026,Feb,20 SourceError Coffee report date not found
-  skip 2026,Feb,23 SourceError Coffee report date not found
-  skip 2026,Feb,24 SourceError Coffee report date not found
-  skip 2026,Feb,25 SourceError Coffee report date not found
-  skip 2026,Feb,26 SourceError Coffee report date not found
-  skip 2026,Feb,27 SourceError Coffee report date not found
 coffee month 2026-03 days 12
-  skip 2026,Mar,03 SourceError Coffee report date not found
-  skip 2026,Mar,04 SourceError Coffee report date not found
-  skip 2026,Mar,05 SourceError Coffee report date not found
-  skip 2026,Feb,27 SourceError Coffee report date not found
-  skip 2026,Mar,11 SourceError Coffee report date not found
-  skip 2026,Mar,12 SourceError Coffee report date not found
-  skip 2026,Mar,13 SourceError Coffee report date not found
-  skip 2026,Mar,16 SourceError Coffee report date not found
-  skip 2026,Mar,17 SourceError Coffee report date not found
-  skip 2026,Mar,18 SourceError Coffee report date not found
-  skip 2026,Mar,27 SourceError Coffee report date not found
-  skip 2026,Mar,30 SourceError Coffee report date not found
 coffee month 2026-04 days 19
-  skip 2026,Apr,01 SourceError Coffee report date not found
-  skip 2026,Apr,02 SourceError Coffee report date not found
-  skip 2026,Apr,06 SourceError Coffee report date not found
-  skip 2026,Apr,07 SourceError Coffee report date not found
-  skip 2026,Apr,08 SourceError Coffee report date not found
-  skip 2026,Apr,09 SourceError Coffee report date not found
-  skip 2026,Apr,10 SourceError Coffee report date not found
-  skip 2026,Apr,13 SourceError Coffee report date not found
-  skip 2026,Apr,15 SourceError Coffee report date not found
-  skip 2026,Apr,16 SourceError Coffee report date not found
-  skip 2026,Apr,20 SourceError Coffee report date not found
-  skip 2026,Apr,21 SourceError Coffee report date not found
-  skip 2026,Apr,22 SourceError Coffee report date not found
-  skip 2026,Apr,23 SourceError Coffee report date not found
-  skip 2026,Apr,24 SourceError Coffee report date not found
-  skip 2026,Apr,27 SourceError Coffee report date not found
-  skip 2026,Apr,28 SourceError Coffee report date not found
-  skip 2026,Apr,29 SourceError Coffee report date not found
-  skip 2026,Apr,30 SourceError Coffee report date not found
+  skip 2026,Apr,27 SourceError Raw price out of range for robusta_cherry: 94100.0-10100.0
+SAMPLE TEXT 2026,Apr,27                                                                      COFFEE BOARD: BENGALURU
+                                                 Daily Coffee Market Report, Monday, April 27, 2026
+                                                                                   Futures Prices 24.04.2026
+                       ICE (New York)- Arabica Price                                                  ICE (Europe) – Robusta Price
+                                                                                                             US $ / tonne and
+               Month              US cents / lb                              Rs/Kg          Month                                                                                             Rs/Kg
+                                                                                                           cents / lb in brackets
+       May - 2026                        309.80                              643.65       May - 2026         3683          (167.06)                                                           347.09
+       July - 2026                       294.90                              612.69       July - 2026        3483          (157.99)                                                           328.24
+       Sept-2026                         285.10                              592.33        Sept-2026         3403          (154.36)                                                           320.70
+ ICO Group Indicator price on 23.04.2026 and previous price in brackets
+        Other Mild Arabica                      Robusta                                                                                                            Exchange Rate Rs/ US $
+               US Cents/lb                        Rs/Kg                        US Cents/lb                                     Rs/Kg
+                                                                                                                                                                                      94.24
+          340.46 (329.99)                 707.35 (686.40)                    171.37 (166.86)                         356.04 (347.08)
+                                                                                      Futures Price Trend
+
+               380                                                                                                          4500
+                                          Arabica                                                                                                              Robusta
+                                                                               May'26                                       4200                                                               May'26
+               350
+                                                                                                               US $/tonne
+                                                                               Jul'26                                                                                                          Jul'26
+ US Cents/lb
+
+
+
+
+                                                                                                                            3900
+               320
+                                                                                                                            3600
+               290
+                                                                                                                            3300
+               260
+                                                                                                                            3000
+
+
+
+
+                                                                                                                                    1
+                                                                                                                                    2
+                                                                                                                                    7
+                                                                                                                                    8
+                                                                                                                                    9
+                                                                                                                                   19
+
+
+
+                                                                                                                                   26
+                                                                                                                                   16
+                                                                                                                                   17
+                                                                     
+  skip 2026,Apr,28 SourceError Raw price out of range for robusta_cherry: 94100.0-10100.0
+SAMPLE TEXT 2026,Apr,28                                                                     COFFEE BOARD: BENGALURU
+                                                 Daily Coffee Market Report, Tuesday, April 28, 2026
+                                                                                   Futures Prices 27.04.2026
+                        ICE (New York)- Arabica Price                                                 ICE (Europe) – Robusta Price
+                                                                                                             US $ / tonne and
+                Month             US cents / lb                              Rs/Kg          Month                                                                                                Rs/Kg
+                                                                                                           cents / lb in brackets
+      May - 2026                         304.10                              633.15       May - 2026         3629          (164.61)                                                              342.72
+      July - 2026                        288.50                              600.67       July - 2026        3428          (155.49)                                                              323.74
+      Sept-2026                          278.80                              580.47        Sept-2026         3344          (151.68)                                                              315.81
+ ICO Group Indicator price on 24.04.2026 and previous price in brackets
+        Other Mild Arabica                      Robusta                                                                                                            Exchange Rate Rs/ US $
+   US Cents/lb          Rs/Kg         US Cents/lb          Rs/Kg
+                                                                                                                                                                                         94.44
+         336.23 (340.46)                  700.05 (707.35)                    171.63 (171.37)                         357.34 (356.04)
+                                                                                      Futures Price Trend
+
+                                                 Arabica                                                                                                       Robusta
+                380                                                                                                           4500
+                                                                               May'26                                                                                                       May'26
+
+                                                                                                                 US $/tonne
+                350                                                                                                           4200                                                          Jul'26
+                                                                               Jul'26
+  US Cents/lb
+
+
+
+
+                                                                                                                              3900
+                320
+                                                                                                                              3600
+                290
+                                                                                                                              3300
+                260
+                                                                                                                              3000
+                                                                                                                                         16
+                                                                                                                                         17
+                                                                                                                                         18
+                                                                                                                                         19
+                                                                                                                                         20
+                                                                                                                                         23
+                                                                                                                                         24
+                                                                                                                                         25
+                                                                                                                                         
 coffee month 2026-05 days 19
-  skip 2026,May,04 SourceError Coffee report date not found
-  skip 2026,May,05 SourceError Coffee report date not found
-  skip 2026,May,06 SourceError Coffee report date not found
-  skip 2026,May,07 SourceError Coffee report date not found
-  skip 2026,May,08 SourceError Coffee report date not found
-  skip 2026,May,11 SourceError Coffee report date not found
-  skip 2026,May,12 SourceError Coffee report date not found
-  skip 2026,May,13 SourceError Coffee report date not found
-  skip 2026,May,14 SourceError Coffee report date not found
-  skip 2026,May,15 SourceError Coffee report date not found
-  skip 2026,May,18 SourceError Coffee report date not found
-  skip 2026,May,19 SourceError Coffee report date not found
-  skip 2026,May,20 SourceError Coffee report date not found
-  skip 2026,May,21 SourceError Coffee report date not found
-  skip 2026,May,22 SourceError Coffee report date not found
-  skip 2026,May,25 SourceError Coffee report date not found
-  skip 2026,May,26 SourceError Coffee report date not found
-  skip 2026,May,27 SourceError Coffee report date not found
-  skip 2026,May,29 SourceError Coffee report date not found
+  skip 2026,May,15 SourceError Raw coffee price block not found
+  skip 2026,May,29 URLError <urlopen error [Errno 111] Connection refused>
 coffee month 2026-06 days 20
-  skip 2026,Jun,01 SourceError Coffee report date not found
-  skip 2026,Jun,02 SourceError Coffee report date not found
-  skip 2026,Jun,03 SourceError Coffee report date not found
-  skip 2026,Jun,04 SourceError Coffee report date not found
-  skip 2026,Jun,05 SourceError Coffee report date not found
-  skip 2026,Jun,08 SourceError Coffee report date not found
-  skip 2026,Jun,09 SourceError Coffee report date not found
-  skip 2026,Jun,10 SourceError Coffee report date not found
-  skip 2026,Jun,11 SourceError Coffee report date not found
-  skip 2026,Jun,12 SourceError Coffee report date not found
-  skip 2026,Jun,22 SourceError Coffee report date not found
-  skip 2026,Jun,16 SourceError Coffee report date not found
-  skip 2026,Jun,17 SourceError Coffee report date not found
-  skip 2026,Jun,19 SourceError Coffee report date not found
-  skip 2026,Jun,22 SourceError Coffee report date not found
-  skip 2026,Jun,23 SourceError Coffee report date not found
-  skip 2026,Jun,24 SourceError Coffee report date not found
-  skip 2026,Jun,26 SourceError Coffee report date not found
-  skip 2026,Jun,29 SourceError Coffee report date not found
-  skip 2026,Jun,29 SourceError Coffee report date not found
 coffee month 2026-07 days 23
-  skip 2026,Jul,01 SourceError Coffee report date not found
-  skip 2026,Jul,02 SourceError Coffee report date not found
-  skip 2026,Jul,03 SourceError Coffee report date not found
-  skip 2026,Jul,06 SourceError Coffee report date not found
-  skip 2026,Jul,07 SourceError Coffee report date not found
-  skip 2026,Jul,08 SourceError Coffee report date not found
-  skip 2026,Jul,09 SourceError Coffee report date not found
-  skip 2026,Jul,10 SourceError Coffee report date not found
-  skip 2026,Jul,13 SourceError Coffee report date not found
-  skip 2026,Jul,14 SourceError Coffee report date not found
-  skip 2026,Jul,15 SourceError Coffee report date not found
-  skip 2026,Jul,16 SourceError Coffee report date not found
-  skip 2026,Jul,17 SourceError Coffee report date not found
-  skip 2026,Jul,20 SourceError Coffee report date not found
-  skip 2026,Jul,21 SourceError Coffee report date not found
-  skip 2026,Jul,22 SourceError Coffee report date not found
-  skip 2026,Jul,23 SourceError Coffee report date not found
-  skip 2026,Jul,24 SourceError Coffee report date not found
-  skip 2026,Jul,27 SourceError Coffee report date not found
-  skip 2026,Jul,28 SourceError Coffee report date not found
-  skip 2026,Jul,29 SourceError Coffee report date not found
-  skip 2026,Jul,30 SourceError Coffee report date not found
-  skip 2026,Jul,31 SourceError Coffee report date not found
 coffee month 2026-08 days 17
-  skip 2026,Aug,03 SourceError Coffee report date not found
-  skip 2026,Aug,04 SourceError Coffee report date not found
-  skip 2026,Aug,05 SourceError Coffee report date not found
-  skip 2026,Aug,06 SourceError Coffee report date not found
-  skip 2026,Aug,07 SourceError Coffee report date not found
-  skip 2026,Aug,10 SourceError Coffee report date not found
-  skip 2026,Aug,11 SourceError Coffee report date not found
-  skip 2026,Aug,12 SourceError Coffee report date not found
-  skip 2026,Aug,13 SourceError Coffee report date not found
-  skip 2026,Aug,17 SourceError Coffee report date not found
-  skip 2026,Aug,18 SourceError Coffee report date not found
-  skip 2026,Aug,19 SourceError Coffee report date not found
-  skip 2026,Aug,20 SourceError Coffee report date not found
-  skip 2026,Aug,21 SourceError Coffee report date not found
-  skip 2026,Aug,24 SourceError Coffee report date not found
-  skip 2026,Aug,27 SourceError Coffee report date not found
-  skip 2026,Aug,31 SourceError Coffee report date not found
 coffee month 2026-09 days 20
-  skip 2026,Sep,01 SourceError Coffee report date not found
-  skip 2026,Sep,02 SourceError Coffee report date not found
-  skip 2026,Sep,03 SourceError Coffee report date not found
-  skip 2026,Sep,04 SourceError Coffee report date not found
-  skip 2026,Sep,07 SourceError Coffee report date not found
-  skip 2026,Sep,09 SourceError Coffee report date not found
-  skip 2026,Sep,10 SourceError Coffee report date not found
-  skip 2026,Sep,11 SourceError Coffee report date not found
-  skip 2026,Sep,15 SourceError Coffee report date not found
-  skip 2026,Sep,16 SourceError Coffee report date not found
-  skip 2026,Sep,17 SourceError Coffee report date not found
-  skip 2026,Sep,18 SourceError Coffee report date not found
-  skip 2026,Sep,21 SourceError Coffee report date not found
-  skip 2026,Sep,22 SourceError Coffee report date not found
-  skip 2026,Sep,23 SourceError Coffee report date not found
-  skip 2026,Sep,24 SourceError Coffee report date not found
-  skip 2026,Sep,25 SourceError Coffee report date not found
-  skip 2026,Sep,28 SourceError Coffee report date not found
-  skip 2026,Sep,29 SourceError Coffee report date not found
-  skip 2026,Sep,30 SourceError Coffee report date not found
+  skip 2026,Sep,07 SourceError Raw coffee price block not found
 coffee month 2026-10 days 16
-  skip 2026,Oct,01 SourceError Coffee report date not found
-  skip 2026,Oct,05 SourceError Coffee report date not found
-  skip 2026,Oct,06 SourceError Coffee report date not found
-  skip 2026,Oct,07 SourceError Coffee report date not found
 coffee month 2026-11 days 0
-coffee reports read: 12
+coffee reports read: 226
