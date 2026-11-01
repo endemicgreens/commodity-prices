@@ -45,7 +45,7 @@
 .egmp .fine p{margin:0 0 8px}
 .egmp .err{padding:14px;border:1px solid var(--line);border-radius:10px}
 @media (max-width:1000px){.egmp .two{grid-template-columns:1fr;gap:14px}}
-@media (max-width:760px){.egmp{font-size:16px}.egmp .grid,.egmp .more{grid-template-columns:1fr}.egmp .card{padding:16px}.egmp svg.spark{width:64px}.egmp table{font-size:14.5px}.egmp .sp{display:none}.egmp .big{font-size:17px}.egmp th,.egmp td{padding:6px 3px}}
+@media (max-width:760px){.egmp{font-size:16px}.egmp .grid,.egmp .more{grid-template-columns:1fr}.egmp .card{padding:16px}.egmp svg.spark{width:64px}.egmp table{font-size:14.5px}.egmp .sp{display:none}.egmp .chg{white-space:normal;display:inline-block;line-height:1.3}.egmp td.n{white-space:normal}.egmp .big{white-space:nowrap}.egmp .big{font-size:17px}.egmp th,.egmp td{padding:6px 3px}}
 </style>
 <div class="egmp" id="egmp" lang="en">
 <h1 class="ttl">Coffee, Pepper and Cardamom Prices</h1>
@@ -75,6 +75,7 @@ var root=document.getElementById('egmp'); if(!root) return;
 var $=function(id){return document.getElementById(id)};
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function d(s){if(!s)return '';var p=s.slice(0,10).split('-');return (+p[2])+' '+MON[+p[1]-1]+' '+p[0]}
+function ds(s){if(!s)return '';var p=s.slice(0,10).split('-');return (+p[2])+' '+MON[+p[1]-1]}
 function dt(s){if(!s)return '';var t=s.slice(11,16);return d(s)+(t?', '+t+' IST':'')}
 function inr(v,dp){if(v==null||isNaN(v))return '–';return '₹'+Number(v).toLocaleString('en-IN',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0})}
 function n(v,dp){return Number(v).toLocaleString('en-IN',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0})}
@@ -95,7 +96,7 @@ function render(P,H){
   if(cd){var rk=cd.raw_karnataka,hc=H.coffee||[];
     html+='<div class="two"><div><p class="src">Rupees per 50 kg bag, as on '+esc(d(rk.as_on))+'. Source: <a href="'+esc(C.url)+'" target="_blank" rel="noopener">Coffee Board of India, Daily Coffee Market Report</a> of '+esc(d(cd.report_date))+'.</p><table><thead><tr><th>Type</th><th class="n">Price range</th><th class="n">Change</th><th class="n sp">90 days</th></tr></thead><tbody>';
     COFFEE.forEach(function(t){var o=rk.prices[t[0]];if(!o)return;var key=function(r){return mid(r[t[0]])};var p1=prevRec(hc,rk.as_on,key),p30=prevRec(hc,rk.as_on,key,30);
-      html+='<tr><td class="k">'+t[1]+'</td><td class="n"><span class="big">'+inr(o.low)+'–'+n(o.high)+'</span></td><td class="n">'+(p1?chg(mid(o),key(p1),'since '+d(p1.date)):'')+(p30?'<br>'+chg(mid(o),key(p30),'in 30 days'):'')+'</td><td class="n sp">'+spark(hc,key)+'</td></tr>';
+      html+='<tr><td class="k">'+t[1]+'</td><td class="n"><span class="big">'+inr(o.low)+'–'+n(o.high)+'</span></td><td class="n">'+(p1?chg(mid(o),key(p1),'since '+ds(p1.date)):'')+(p30?'<br>'+chg(mid(o),key(p30),'in 30 days'):'')+'</td><td class="n sp">'+spark(hc,key)+'</td></tr>';
       share.push(t[1]+': '+inr(o.low)+'–'+n(o.high)+' per 50 kg');});
     html+='</tbody></table></div>';
     share[share.length-4]='☕ Coffee, Karnataka, '+d(rk.as_on)+' (Coffee Board)\n'+share[share.length-4];
@@ -114,7 +115,7 @@ function render(P,H){
   if(pd){html+='<p class="src">Rupees per kg. Source: <a href="'+esc(Pp.url)+'" target="_blank" rel="noopener">Spices Board of India, current market prices</a>, which credits each figure to the market’s own report'+(pd.markets.some(function(m){return m.market==='Sirsi'})?' (IPSTA for Kochi, the APMC for Sirsi)':' (IPSTA for Kochi)')+'.</p><table><thead><tr><th>Market</th><th class="n">Price</th><th class="n">Change</th></tr></thead><tbody>';
     share.push('🌶 Pepper (Spices Board)');
     pd.markets.forEach(function(m){var k=(m.market+(m.grade?'_'+m.grade:'')).toLowerCase();var key=function(r){return r[k]};var p1=prevRec(hp,m.date,key);var mk=m.market==='Cochin'?'Kochi':m.market;var label=mk+(m.grade?', '+m.grade.toLowerCase():'');
-      html+='<tr><td class="k">'+esc(label)+'<br><span class="src">'+esc(d(m.date))+'</span></td><td class="n"><span class="big">'+inr(m.avg)+'</span></td><td class="n">'+(p1?chg(m.avg,key(p1),'since '+d(p1.date)):'')+spark(hp,key)+'</td></tr>';
+      html+='<tr><td class="k">'+esc(label)+'<br><span class="src">'+esc(d(m.date))+'</span></td><td class="n"><span class="big">'+inr(m.avg)+'</span></td><td class="n">'+(p1?chg(m.avg,key(p1),'since '+ds(p1.date)):'')+spark(hp,key)+'</td></tr>';
       share.push(label+': '+inr(m.avg)+'/kg ('+d(m.date)+')');});
     html+='</tbody></table>';}
   html+='</div>';
@@ -123,7 +124,7 @@ function render(P,H){
   html+='<div class="card"><h2>Small cardamom</h2>'+staleNote(K);
   if(kd){var key=function(r){return r.weighted_average};var p1=prevRec(hk,kd.date,key),p30=prevRec(hk,kd.date,key,30);
     html+='<p class="src">Rupees per kg, e-auctions of '+esc(d(kd.date))+'. Source: <a href="'+esc(K.url)+'" target="_blank" rel="noopener">Spices Board of India, daily auction prices</a>.</p>';
-    html+='<p><span class="big">'+inr(kd.weighted_average)+'</span> average '+(p1?chg(kd.weighted_average,key(p1),'since '+d(p1.date)):'')+(p30?' '+chg(kd.weighted_average,key(p30),'in 30 days'):'')+'</p>'+spark(hk,key);
+    html+='<p><span class="big">'+inr(kd.weighted_average)+'</span> average '+(p1?chg(kd.weighted_average,key(p1),'since '+ds(p1.date)):'')+(p30?' '+chg(kd.weighted_average,key(p30),'in 30 days'):'')+'</p>'+spark(hk,key);
     html+='<table><thead><tr><th>Auction</th><th class="n">Average</th><th class="n">Highest</th><th class="n">Sold</th></tr></thead><tbody>';
     kd.auctions.forEach(function(a){html+='<tr><td>'+esc(a.auctioneer)+'</td><td class="n">'+inr(a.avg)+'</td><td class="n">'+inr(a.max)+'</td><td class="n">'+n(Math.round(a.sold_kg||0))+' kg</td></tr>'});
     html+='</tbody></table>';
@@ -149,8 +150,8 @@ function chart(H){
   ctl.onclick=function(e){var b=e.target.closest('button');if(!b)return;cur=+b.dataset.i;[].forEach.call(ctl.children,function(x){x.setAttribute('aria-pressed',x===b)});draw()};
   function draw(){
     var o=opts[cur],s=(H[o[1]]||[]).map(function(r){return [r.date,o[2](r)]}).filter(function(p){return p[1]!=null});
-    var svg=$('egmp-chart'),W=900,Hh=300,L=70,R=14,T=14,B=34;
-    if(s.length<2){svg.setAttribute('viewBox','0 0 900 60');svg.innerHTML='<text x="0" y="30">Not enough history yet.</text>';$('egmp-chartsrc').textContent='';return}svg.setAttribute('viewBox','0 0 900 300');
+    var svg=$('egmp-chart'),sm=(svg.parentNode.clientWidth||900)<600,W=sm?420:900,Hh=sm?280:300,L=sm?50:70,R=10,T=14,B=34;
+    if(s.length<2){svg.setAttribute('viewBox','0 0 900 60');svg.innerHTML='<text x="0" y="30">Not enough history yet.</text>';$('egmp-chartsrc').textContent='';return}svg.setAttribute('viewBox','0 0 '+((svg.parentNode.clientWidth||900)<600?'420 280':'900 300'));
     var t0=new Date(s[0][0]).getTime(),t1=new Date(s[s.length-1][0]).getTime();
     var vs=s.map(function(p){return p[1]}),lo=Math.min.apply(null,vs),hi=Math.max.apply(null,vs),pad=(hi-lo)*0.08||hi*0.05;lo-=pad;hi+=pad;
     var X=function(t){return L+(t-t0)/(t1-t0||1)*(W-L-R)},Y=function(v){return T+(hi-v)/(hi-lo)*(Hh-T-B)};
