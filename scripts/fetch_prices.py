@@ -188,6 +188,10 @@ def parse_cardamom(page):
     auctions = []
     for c in rows:
         if len(c) >= 9 and re.match(r"\d{2}-[A-Z][a-z]{2}-\d{4}$", c[1]):
+            try:
+                [num(x) for x in c[3:9]]
+            except ValueError:
+                continue  # a malformed number in the source table: leave that auction out
             a = {"date": to_iso(c[1], "%d-%b-%Y"), "auctioneer": c[2].title(), "lots": num(c[3]),
                  "arrived_kg": num(c[4]), "sold_kg": num(c[5]),
                  "max": num(c[6]), "min": num(c[7]), "avg": num(c[8])}

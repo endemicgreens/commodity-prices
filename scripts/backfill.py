@@ -112,7 +112,11 @@ def cardamom(hist):
             if len(c) >= 9 and re.match(r"\d{2}-[A-Z][a-z]{2}-\d{4}$", c[1]):
                 day = fp.to_iso(c[1], "%d-%b-%Y")
                 dates.append(day)
-                sold, avg = fp.num(c[5]) or 0, fp.num(c[8])
+                try:
+                    sold, avg = fp.num(c[5]) or 0, fp.num(c[8])
+                except ValueError:
+                    log("  cardamom row skipped (unreadable number)", day, c[2][:40], c[5], c[8])
+                    continue
                 if avg and 200 <= avg <= 15000:
                     by_date.setdefault(day, []).append((sold, avg))
         if not dates or min(dates) < START.isoformat():
@@ -154,7 +158,11 @@ def main():
     if len(sys.argv) > 2 and sys.argv[1] == "--merge":
         return merge(sys.argv[2])
     hist = {}
+    current = fp.load(fp.HISTORY, {})
     for name, fn in (("pepper", pepper), ("cardamom", cardamom), ("coffee", coffee)):
+        if len(current.get(name, [])) > 150:
+            log(name, "already has", len(current[name]), "dates; skipped")
+            continue
         try:
             fn(hist)
         except Exception as e:
