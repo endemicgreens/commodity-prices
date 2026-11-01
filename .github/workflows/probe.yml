@@ -3,6 +3,8 @@ on:
   push:
     branches: [setup-test]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
@@ -16,3 +18,12 @@ jobs:
         with:
           name: probe-output
           path: out/
+      - name: Save results to a branch
+        run: |
+          git config user.name "price-bot"
+          git config user.email "connect@endemicgreens.com"
+          git checkout --orphan probe-output
+          git rm -rq --cached . || true
+          git add -f out/
+          git commit -qm "Probe output $(date -u +%FT%TZ)"
+          git push -f origin probe-output
