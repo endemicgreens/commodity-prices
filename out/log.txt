@@ -1,0 +1,9 @@
+coffeeboard page bytes 13711
+hidden fields ['__EVENTTARGET', '__EVENTARGUMENT', '__VIEWSTATE', '__VIEWSTATEGENERATOR', '__VIEWSTATEENCRYPTED', '__EVENTVALIDATION']
+report date on page None
+coffeeboard postback 200 pdf attachment;filename=Ma_30-10-2026_Coffee Market Report _30_October 2026.pdf 236161
+SPICES: no weekly PDF found in last 21 days
+page https://indianspices.com/ 200 259009
+page https://indianspices.com/marketing/price/domestic/daily-price.html 200 126494
+page https://www.indianspices.com/marketing/price/domestic/current-market-price.html 200 126469
+page https://www.indianspices.com/weekly-price-domestic.html 200 114916
