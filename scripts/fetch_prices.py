@@ -77,19 +77,40 @@ def coffee_text(op=None, pdf_path=None):
     return out.stdout.decode("utf-8", "replace")
 
 
+MONTH_RE = r"([A-Z][a-z]{2})[a-z]*\.?\s*[–-]?\s*'?(\d{4}|\d{2})\b"
+
+
+def _month(m):
+    y = m.group(2)
+    return f"{m.group(1)}-{('20' + y) if len(y) == 2 else y}"
+
+
+def _date_any(s):
+    for fmt in ("%d.%m.%Y", "%d-%m-%Y", "%d/%m/%Y", "%d.%m.%y"):
+        try:
+            return dt.datetime.strptime(s, fmt).date().isoformat()
+        except ValueError:
+            pass
+    raise SourceError(f"Unreadable date {s}")
+
+
 def parse_coffee(t):
-    m = re.search(r"Daily Coffee Market Report,\s*\w+\s+(\w+ \d{1,2}, \d{4})", t)
-    check(m, "Coffee report date not found")
-    report_date = to_iso(m.group(1), "%B %d, %Y")
+    report_date = None
+    m = re.search(r"Daily Coffee Market Report,?\s*(?:\w+day)?,?\s*([A-Z][a-z]+),?\s+(\d{1,2}),?\s+(\d{4})", t)
+    if m:
+        try:
+            report_date = dt.datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%B %d %Y").date().isoformat()
+        except ValueError:
+            report_date = None
 
     # Raw coffee prices, Karnataka, Rs per 50 kg
-    m = re.search(r"Raw Coffee Price \(Karnataka\) as on (\d{2}\.\d{2}\.\d{4})", t)
+    m = re.search(r"Raw\s+Coffee\s+Prices?\s*\(?\s*Karnataka\s*\)?[^\n]{0,30}?as\s+on\s+(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})", t, re.I)
     check(m, "Raw coffee price block not found")
-    raw_date = to_iso(m.group(1), "%d.%m.%Y")
+    raw_date = _date_any(m.group(1))
     after = t[m.end():].splitlines()
     vals = None
-    for line in after[:6]:
-        nums = re.findall(r"\d[\d,]*", line)
+    for line in after[:8]:
+        nums = [x for x in re.findall(r"\d[\d,]*", line) if len(x.replace(",", "")) >= 3]
         if len(nums) >= 8:
             vals = [num(x) for x in nums[:8]]
             break
@@ -101,21 +122,28 @@ def parse_coffee(t):
         check(1000 <= lo <= hi <= 100000, f"Raw price out of range for {n}: {lo}-{hi}")
         raw[n] = {"low": lo, "high": hi}
 
-    # Futures
-    m = re.search(r"Futures Prices (\d{2}\.\d{2}\.\d{4})", t)
-    check(m, "Futures date not found")
-    fut_date = to_iso(m.group(1), "%d.%m.%Y")
+    # Futures (layout varies a little between years)
+    fut_date = None
+    m = re.search(r"Futures\s+Prices?\s+(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})", t)
+    if m:
+        fut_date = _date_any(m.group(1))
     arabica, robusta = [], []
-    for a_m, a_c, a_r, r_m, r_t, r_c, r_r in re.findall(
-        r"^\s*([A-Z][a-z]{2}-\d{4})\s+([\d.]+)\s+([\d.]+)\s+([A-Z][a-z]{2}-\d{4})\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*$",
-        t, re.M):
-        arabica.append({"month": a_m, "us_cents_lb": num(a_c), "inr_kg": num(a_r)})
-        robusta.append({"month": r_m, "usd_tonne": num(r_t), "us_cents_lb": num(r_c), "inr_kg": num(r_r)})
-    check(arabica and robusta, "Futures rows not found")
-    for a in arabica:
-        check(50 <= a["us_cents_lb"] <= 1500, f"Arabica futures out of range: {a}")
-    for r in robusta:
-        check(300 <= r["usd_tonne"] <= 20000, f"Robusta futures out of range: {r}")
+    block = t[m.end():m.end() + 3000] if m else t
+    for line in block.splitlines():
+        ms = list(re.finditer(MONTH_RE, line))
+        ms = [x for x in ms if x.group(1) in ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")]
+        if len(ms) != 2:
+            continue
+        left = re.findall(r"\(?(\d[\d,]*\.?\d*)\)?", line[ms[0].end():ms[1].start()])
+        right = re.findall(r"\(?(\d[\d,]*\.?\d*)\)?", line[ms[1].end():])
+        if len(left) < 2 or len(right) < 3:
+            continue
+        a = {"month": _month(ms[0]), "us_cents_lb": num(left[0]), "inr_kg": num(left[1])}
+        r = {"month": _month(ms[1]), "usd_tonne": num(right[0]), "us_cents_lb": num(right[1]), "inr_kg": num(right[2])}
+        if 50 <= a["us_cents_lb"] <= 1500 and 300 <= r["usd_tonne"] <= 20000:
+            arabica.append(a)
+            robusta.append(r)
+    futures = {"as_on": fut_date, "arabica_new_york": arabica, "robusta_europe": robusta} if arabica else None
 
     fx = None
     i = t.find("Exchange Rate")
@@ -125,9 +153,9 @@ def parse_coffee(t):
             fx = float(m.group(1))
 
     return {
-        "report_date": report_date,
+        "report_date": report_date or raw_date,
         "raw_karnataka": {"as_on": raw_date, "unit": "Rs per 50 kg", "prices": raw},
-        "futures": {"as_on": fut_date, "arabica_new_york": arabica, "robusta_europe": robusta},
+        "futures": futures,
         "inr_per_usd": fx,
     }
 
@@ -237,8 +265,8 @@ def update_history(hist, name, data):
     if name == "coffee":
         key = data["raw_karnataka"]["as_on"]
         rec = {"date": key, **{k: v for k, v in data["raw_karnataka"]["prices"].items()},
-               "arabica_ny_front": data["futures"]["arabica_new_york"][0]["us_cents_lb"],
-               "robusta_eu_front": data["futures"]["robusta_europe"][0]["usd_tonne"]}
+               "arabica_ny_front": (data["futures"] or {}).get("arabica_new_york", [{}])[0].get("us_cents_lb"),
+               "robusta_eu_front": (data["futures"] or {}).get("robusta_europe", [{}])[0].get("usd_tonne")}
     elif name == "cardamom":
         key = data["date"]
         rec = {"date": key, "weighted_average": data["weighted_average"]}

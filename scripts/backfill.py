@@ -18,6 +18,7 @@ import fetch_prices as fp  # noqa: E402
 
 START = dt.date.today() - dt.timedelta(days=380)
 LOG = []
+SAMPLES = [0]
 
 
 def log(*a):
@@ -70,6 +71,12 @@ def coffee(hist):
                     n_ok += 1
                 except Exception as e:
                     log("  skip", label, type(e).__name__, str(e)[:120])
+                    if SAMPLES[0] < 3:
+                        SAMPLES[0] += 1
+                        try:
+                            log("SAMPLE TEXT", label, fp.coffee_text(pdf_path=path)[:5000])
+                        except Exception:
+                            pass
                 time.sleep(0.5)
         except Exception as e:
             log("coffee month failed", d, type(e).__name__, str(e)[:150])
@@ -94,7 +101,9 @@ def cardamom(hist):
     for page_no in range(1, 200):
         try:
             page = fp.fetch_html(url + (f"?page={page_no}" if page_no > 1 else ""))
-            rows = fp.table_rows(page, "Daily Auction Price of Small Cardamom")
+            rows = [[re.sub(r"\s+", " ", fp.htmlmod.unescape(re.sub(r"<[^>]+>", " ", c))).strip()
+                     for c in re.findall(r"<t[hd].*?</t[hd]>", r, re.S)]
+                    for r in re.findall(r"<tr.*?</tr>", page, re.S)]
         except Exception as e:
             log("cardamom page failed", page_no, type(e).__name__, str(e)[:120])
             continue

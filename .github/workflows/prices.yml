@@ -36,7 +36,10 @@ jobs:
           git config user.name "price-bot"
           git config user.email "connect@endemicgreens.com"
           git add data/
-          git diff --cached --quiet || (git commit -qm "Prices $(TZ=Asia/Kolkata date +'%F %H:%M') IST" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -qm "Prices $(TZ=Asia/Kolkata date +'%F %H:%M') IST"
+            for i in 1 2 3; do git push && break; git pull -q --rebase origin main; done
+          fi
       - name: Build site folder
         run: |
           mkdir -p _site
