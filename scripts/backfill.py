@@ -121,8 +121,30 @@ def cardamom(hist):
     log("cardamom dates:", len(series), "pages read:", page_no)
 
 
-def main():
+def merge(path):
+    """Merge a backfill file into the current history (newer job data wins on the same date)."""
+    import json
+    new = fp.load(path, {})
     hist = fp.load(fp.HISTORY, {})
+    for k, series in new.items():
+        cur = {r["date"]: r for r in hist.get(k, [])}
+        for r in series:
+            if r["date"] in cur:
+                merged = dict(r)
+                merged.update(cur[r["date"]])
+                cur[r["date"]] = merged
+            else:
+                cur[r["date"]] = r
+        hist[k] = sorted(cur.values(), key=lambda r: r["date"])[-500:]
+    with open(fp.HISTORY, "w", encoding="utf-8") as f:
+        json.dump(hist, f, ensure_ascii=False, separators=(",", ":"))
+    print({k: len(v) for k, v in hist.items()})
+
+
+def main():
+    if len(sys.argv) > 2 and sys.argv[1] == "--merge":
+        return merge(sys.argv[2])
+    hist = {}
     for name, fn in (("pepper", pepper), ("cardamom", cardamom), ("coffee", coffee)):
         try:
             fn(hist)
@@ -131,7 +153,7 @@ def main():
     for k in hist:
         hist[k] = hist[k][-500:]
     import json
-    with open(fp.HISTORY, "w", encoding="utf-8") as f:
+    with open(os.path.join(fp.DATA, "history_backfill.json"), "w", encoding="utf-8") as f:
         json.dump(hist, f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(fp.DATA, "backfill_log.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(LOG) + "\n")

@@ -24,6 +24,15 @@ jobs:
         run: |
           git config user.name "price-bot"
           git config user.email "connect@endemicgreens.com"
-          git pull -q --rebase origin main || true
-          git add data/
-          git diff --cached --quiet || (git commit -qm "Load price history" && git push)
+          mv data/history_backfill.json data/backfill_log.txt "$RUNNER_TEMP"/
+          git checkout -- data
+          for i in 1 2 3; do
+            git pull -q --rebase origin main
+            python scripts/backfill.py --merge "$RUNNER_TEMP/history_backfill.json"
+            cp "$RUNNER_TEMP/backfill_log.txt" data/
+            git add data/
+            git diff --cached --quiet && break
+            git commit -qm "Load price history"
+            git push && break
+            git reset -q --hard origin/main
+          done
