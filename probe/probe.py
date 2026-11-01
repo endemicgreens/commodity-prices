@@ -53,7 +53,7 @@ for back in range(0, 21):
 if not got:
     log("SPICES: no weekly PDF found in last 21 days")
 
-for u in ["https://indianspices.com/", "https://indianspices.com/marketing/price/domestic/daily-price.html", "https://www.indianspices.com/"]:
+for u in ["https://indianspices.com/", "https://indianspices.com/marketing/price/domestic/daily-price.html", "https://www.indianspices.com/marketing/price/domestic/current-market-price.html", "https://www.indianspices.com/weekly-price-domestic.html"]:
     try:
         r = op.open(u, timeout=60); b = r.read()
         log("page", u, r.status, len(b))
