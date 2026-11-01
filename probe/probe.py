@@ -6,7 +6,9 @@ jar = http.cookiejar.CookieJar()
 op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
 op.addheaders = [("User-Agent", "Mozilla/5.0 (EndemicGreens price bot; connect@endemicgreens.com)")]
 
-def log(*a): print(*a, flush=True)
+LOG=open("out/log.txt","w")
+def log(*a):
+    print(*a, flush=True); print(*a, file=LOG, flush=True)
 
 # Coffee Board: page has an ASP.NET postback button for the PDF.
 try:
@@ -45,8 +47,16 @@ for back in range(0, 21):
                     got = True
                     break
             except Exception as e:
-                pass
+                if back < 8 and name == "SPICE MARKET": log("spices try", u, repr(e)[:120])
         if got: break
     if got: break
 if not got:
     log("SPICES: no weekly PDF found in last 21 days")
+
+for u in ["https://indianspices.com/", "https://indianspices.com/marketing/price/domestic/daily-price.html", "https://www.indianspices.com/"]:
+    try:
+        r = op.open(u, timeout=60); b = r.read()
+        log("page", u, r.status, len(b))
+        open("out/page_" + re.sub(r"\W+", "_", u)[:60] + ".html", "wb").write(b)
+    except Exception as e:
+        log("page error", u, repr(e)[:150])
