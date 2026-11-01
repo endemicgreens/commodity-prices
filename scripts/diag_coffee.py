@@ -8,7 +8,7 @@ op = fp.opener()
 base = "https://coffeeboard.gov.in/Market_Info_Archives.aspx"
 month_url = "https://coffeeboard.gov.in/Archives_Month.aspx"
 out = []
-for y, m in [(2025, 11), (2026, 2), (2026, 6), (2026, 9)]:
+for y, m in [(2025, 11), (2026, 2), (2026, 6), (2026, 9), (2025, 12)]:
     page = op.open(base, timeout=90).read().decode("utf-8", "replace")
     html = bf.post(op, base, bf.form_fields(page), f"GridView1$ctl{m + 1:02d}$LinkButton{y}").read().decode("utf-8", "replace")
     days = re.findall(r"__doPostBack\(&#39;(DataList1\$ctl\d+\$LinkButton1)&#39;,&#39;&#39;\)\"[^>]*>\s*(\d{4},\w{3},\d{2})", html)
@@ -18,5 +18,5 @@ for y, m in [(2025, 11), (2026, 2), (2026, 6), (2026, 9)]:
     with os.fdopen(fd, "wb") as f:
         f.write(body)
     t = fp.coffee_text(pdf_path=path)
-    out.append(f"===== {label} =====\n{t[:6000]}")
+    out.append(f"===== {label} =====\n{t}")
 open(os.path.join(fp.DATA, "diag_coffee.txt"), "w", encoding="utf-8").write("\n".join(out))
