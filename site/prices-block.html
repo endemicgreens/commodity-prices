@@ -51,7 +51,7 @@
 <div class="egmp" id="egmp" lang="en">
 <h1 class="ttl">Coffee, Pepper and Cardamom Prices</h1>
 <p class="kick">Today’s prices consolidated: Karnataka coffee, black pepper and small cardamom</p>
-<div class="disc" role="note"><strong>Disclaimer.</strong> These prices are not set or checked by Endemic Greens. They are copied, unchanged, from three official sources: the <a href="https://coffeeboard.gov.in/Market_Info.aspx" target="_blank" rel="noopener">Coffee Board of India, Daily Coffee Market Report</a> (coffee and world futures), the <a href="https://www.indianspices.com/marketing/price/domestic/current-market-price.html" target="_blank" rel="noopener">Spices Board of India, current market prices</a> (black pepper) and the <a href="https://www.indianspices.com/marketing/price/domestic/daily-price.html" target="_blank" rel="noopener">Spices Board of India, daily auction prices</a> (small cardamom). Check the source before you buy or sell. This page is information only, not advice.</div>
+<div class="disc" role="note"><strong>Disclaimer: for convenience only, not a price quote.</strong> Endemic Greens does not buy or sell at these prices, and does not set, check or guarantee them. They are copied automatically, unchanged, from three official sources: the <a href="https://coffeeboard.gov.in/Market_Info.aspx" target="_blank" rel="noopener">Coffee Board of India, Daily Coffee Market Report</a> (coffee and world futures), the <a href="https://www.indianspices.com/marketing/price/domestic/current-market-price.html" target="_blank" rel="noopener">Spices Board of India, current market prices</a> (black pepper) and the <a href="https://www.indianspices.com/marketing/price/domestic/daily-price.html" target="_blank" rel="noopener">Spices Board of India, daily auction prices</a> (small cardamom). Copying can fail or lag, and a source can publish an error, so always confirm the price with the source and with your buyer or seller before you trade. This page is information only, not an offer, a quote or advice, and Endemic Greens accepts no liability for any loss arising from its use.</div>
 <p class="lead">Karnataka coffee prices, Kochi and Sirsi pepper, and small-cardamom auction prices, copied twice a day from the <strong>Coffee Board of India</strong> and the <strong>Spices Board of India</strong>. Every figure shows its date and source, and nothing is estimated or forecast.</p>
 <div class="bar"><a class="pill wa" id="egmp-wa" href="#" target="_blank" rel="noopener">Share on WhatsApp</a><a class="pill ghost" href="/kaadu-kaapi">Try today’s prices in the Kaadu Kaapi Calculator</a><span class="upd" id="egmp-upd">Loading prices…</span></div>
 <div class="grid" id="egmp-grid"></div>
@@ -91,7 +91,7 @@ function staleNote(sec){if(!sec)return '<p class="stale">This source could not b
 var COFFEE=[['arabica_parchment','Arabica parchment'],['arabica_cherry','Arabica cherry'],['robusta_parchment','Robusta parchment'],['robusta_cherry','Robusta cherry']];
 
 function render(P,H){
-  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*Coffee, pepper and cardamom prices* (official sources)'];
+  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*Coffee, pepper and cardamom prices* (copied from official sources, for convenience only)'];
   // coffee
   var C=S.coffee,cd=C&&C.data;
   html+='<div class="card wide"><h2>Coffee (Karnataka)</h2>'+staleNote(C);
@@ -134,7 +134,7 @@ function render(P,H){
   html+='</div>';
   g.innerHTML=html;
   $('egmp-upd').textContent='Last checked '+dt(P.generated)+'. Checked at 9 am and 6 pm IST.';
-  share.push('','Full table and past year: https://endemicgreens.com'+location.pathname);
+  share.push('','Not a price quote. Prices can be wrong or out of date: confirm with the Coffee Board / Spices Board and your buyer before you trade. Endemic Greens accepts no liability for any loss.','Full table, sources and past year: https://endemicgreens.com'+location.pathname);
   $('egmp-wa').href='https://wa.me/?text='+encodeURIComponent(share.join('\n'));
   chart(H);
 }
