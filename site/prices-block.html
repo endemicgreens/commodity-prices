@@ -91,7 +91,7 @@ function staleNote(sec){if(!sec)return '<p class="stale">This source could not b
 var COFFEE=[['arabica_parchment','Arabica parchment'],['arabica_cherry','Arabica cherry'],['robusta_parchment','Robusta parchment'],['robusta_cherry','Robusta cherry']];
 
 function render(P,H){
-  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*Coffee, pepper and cardamom prices* (copied from official sources, for convenience only)'];
+  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*Coffee, pepper and cardamom prices* (for convenience only, not a price quote)'];
   // coffee
   var C=S.coffee,cd=C&&C.data;
   html+='<div class="card wide"><h2>Coffee (Karnataka)</h2>'+staleNote(C);

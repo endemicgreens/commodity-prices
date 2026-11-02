@@ -95,7 +95,7 @@ function staleNote(sec){if(!sec)return '<p class="stale">ಈ ಮೂಲವನ್�
 var COFFEE=[['arabica_parchment','ಅರೆಬಿಕಾ ಪಾರ್ಚ್‌ಮೆಂಟ್'],['arabica_cherry','ಅರೆಬಿಕಾ ಚೆರಿ'],['robusta_parchment','ರೋಬಸ್ಟಾ ಪಾರ್ಚ್‌ಮೆಂಟ್'],['robusta_cherry','ರೋಬಸ್ಟಾ ಚೆರಿ']];
 
 function render(P,H){
-  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*ಕಾಫಿ, ಕಾಳುಮೆಣಸು ಮತ್ತು ಏಲಕ್ಕಿ ಧಾರಣೆ* (ಅಧಿಕೃತ ಮೂಲಗಳಿಂದ, ಅನುಕೂಲಕ್ಕಾಗಿ ಮಾತ್ರ)'];
+  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*ಕಾಫಿ, ಕಾಳುಮೆಣಸು ಮತ್ತು ಏಲಕ್ಕಿ ಧಾರಣೆ* (ಅನುಕೂಲಕ್ಕಾಗಿ ಮಾತ್ರ, ಬೆಲೆಯ ಕೊಟೇಶನ್ ಅಲ್ಲ)'];
   // coffee
   var C=S.coffee,cd=C&&C.data;
   html+='<div class="card wide"><h2>ಕಾಫಿ (ಕರ್ನಾಟಕ)</h2>'+staleNote(C);
