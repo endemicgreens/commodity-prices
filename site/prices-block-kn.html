@@ -100,7 +100,7 @@ function render(P,H){
   if(cd){var rk=cd.raw_karnataka,hc=H.coffee||[];
     html+='<div class="two"><div><p class="src">50 ಕೆ.ಜಿ. ಚೀಲಕ್ಕೆ ರೂಪಾಯಿ, '+esc(d(rk.as_on))+'ರಂತೆ. ಮೂಲ: <a href="'+esc(C.url)+'" target="_blank" rel="noopener">ಭಾರತೀಯ ಕಾಫಿ ಮಂಡಳಿಯ ದೈನಿಕ ಕಾಫಿ ಮಾರುಕಟ್ಟೆ ವರದಿ</a>, '+esc(d(cd.report_date))+'.</p><table><thead><tr><th>ಬಗೆ</th><th class="n">ಧಾರಣೆ</th><th class="n">ಬದಲಾವಣೆ</th><th class="n sp">90 ದಿನ</th></tr></thead><tbody>';
     COFFEE.forEach(function(t){var o=rk.prices[t[0]];if(!o)return;var key=function(r){return mid(r[t[0]])};var p1=prevRec(hc,rk.as_on,key),p30=prevRec(hc,rk.as_on,key,30);
-      html+='<tr><td class="k">'+t[1]+'</td><td class="n"><span class="big">'+inr(o.low)+'–'+n(o.high)+'</span></td><td class="n">'+(p1?chg(mid(o),key(p1),ds(p1.date)+'ರಿಂದ'):'')+(p30?'<br>'+chg(mid(o),key(p30),'30 ದಿನಗಳಲ್ಲಿ'):'')+'</td><td class="n sp">'+spark(hc,key)+'</td></tr>';
+      html+='<tr><td class="k">'+t[1]+'</td><td class="n"><span class="big">'+inr(o.low)+'–'+n(o.high)+'</span></td><td class="n">'+(p1?chg(mid(o),key(p1),ds(p1.date)+' ನಂತರ'):'')+(p30?'<br>'+chg(mid(o),key(p30),'30 ದಿನಗಳಲ್ಲಿ'):'')+'</td><td class="n sp">'+spark(hc,key)+'</td></tr>';
       share.push(t[1]+': '+inr(o.low)+'–'+n(o.high)+' (50 ಕೆ.ಜಿ.ಗೆ)');});
     html+='</tbody></table></div>';
     share[share.length-4]='☕ ಕಾಫಿ, ಕರ್ನಾಟಕ, '+d(rk.as_on)+' (ಕಾಫಿ ಮಂಡಳಿ)\n'+share[share.length-4];
@@ -119,7 +119,7 @@ function render(P,H){
   if(pd){html+='<p class="src">ಕೆ.ಜಿ.ಗೆ ರೂಪಾಯಿ. ಮೂಲ: <a href="'+esc(Pp.url)+'" target="_blank" rel="noopener">ಭಾರತೀಯ ಸಾಂಬಾರ ಮಂಡಳಿಯ ಪ್ರಸ್ತುತ ಮಾರುಕಟ್ಟೆ ಧಾರಣೆ</a>. ಪ್ರತಿ ಅಂಕಿ ಆ ಮಾರುಕಟ್ಟೆಯ ಸ್ವಂತ ವರದಿಯಿಂದ ಬಂದದ್ದು'+(pd.markets.some(function(m){return m.market==='Sirsi'})?' (ಕೊಚ್ಚಿಗೆ IPSTA, ಶಿರಸಿಗೆ APMC)':' (ಕೊಚ್ಚಿಗೆ IPSTA)')+'.</p><table><thead><tr><th>ಮಾರುಕಟ್ಟೆ</th><th class="n">ಧಾರಣೆ</th><th class="n">ಬದಲಾವಣೆ</th></tr></thead><tbody>';
     share.push('🌶 ಕಾಳುಮೆಣಸು (ಸಾಂಬಾರ ಮಂಡಳಿ)');
     pd.markets.forEach(function(m){var k=(m.market+(m.grade?'_'+m.grade:'')).toLowerCase();var key=function(r){return r[k]};var p1=prevRec(hp,m.date,key);var mk=m.market==='Cochin'?'ಕೊಚ್ಚಿ':m.market==='Sirsi'?'ಶಿರಸಿ':m.market;var G={'garbled':'ಗಾರ್ಬಲ್ಡ್','ungarbled':'ಅನ್‌ಗಾರ್ಬಲ್ಡ್'};var gr=m.grade?(G[m.grade.toLowerCase()]||m.grade.toLowerCase()):'';var label=mk+(gr?', '+gr:'');
-      html+='<tr><td class="k">'+esc(label)+'<br><span class="src">'+esc(d(m.date))+'</span></td><td class="n"><span class="big">'+inr(m.avg)+'</span></td><td class="n">'+(p1?chg(m.avg,key(p1),ds(p1.date)+'ರಿಂದ'):'')+spark(hp,key)+'</td></tr>';
+      html+='<tr><td class="k">'+esc(label)+'<br><span class="src">'+esc(d(m.date))+'</span></td><td class="n"><span class="big">'+inr(m.avg)+'</span></td><td class="n">'+(p1?chg(m.avg,key(p1),ds(p1.date)+' ನಂತರ'):'')+spark(hp,key)+'</td></tr>';
       share.push(label+': ಕೆ.ಜಿ.ಗೆ '+inr(m.avg)+' ('+d(m.date)+')');});
     html+='</tbody></table>';}
   html+='</div>';
@@ -128,7 +128,7 @@ function render(P,H){
   html+='<div class="card"><h2>ಸಣ್ಣ ಏಲಕ್ಕಿ</h2>'+staleNote(K);
   if(kd){var key=function(r){return r.weighted_average};var p1=prevRec(hk,kd.date,key),p30=prevRec(hk,kd.date,key,30);
     html+='<p class="src">ಕೆ.ಜಿ.ಗೆ ರೂಪಾಯಿ, '+esc(d(kd.date))+'ರ ಇ-ಹರಾಜುಗಳು. ಮೂಲ: <a href="'+esc(K.url)+'" target="_blank" rel="noopener">ಭಾರತೀಯ ಸಾಂಬಾರ ಮಂಡಳಿಯ ದೈನಿಕ ಹರಾಜು ಧಾರಣೆ</a>.</p>';
-    html+='<p>ಸರಾಸರಿ <span class="big">'+inr(kd.weighted_average)+'</span> '+(p1?chg(kd.weighted_average,key(p1),ds(p1.date)+'ರಿಂದ'):'')+(p30?' '+chg(kd.weighted_average,key(p30),'30 ದಿನಗಳಲ್ಲಿ'):'')+'</p>'+spark(hk,key);
+    html+='<p>ಸರಾಸರಿ <span class="big">'+inr(kd.weighted_average)+'</span> '+(p1?chg(kd.weighted_average,key(p1),ds(p1.date)+' ನಂತರ'):'')+(p30?' '+chg(kd.weighted_average,key(p30),'30 ದಿನಗಳಲ್ಲಿ'):'')+'</p>'+spark(hk,key);
     html+='<table><thead><tr><th>ಹರಾಜು</th><th class="n">ಸರಾಸರಿ</th><th class="n">ಗರಿಷ್ಠ</th><th class="n">ಮಾರಾಟ</th></tr></thead><tbody>';
     kd.auctions.forEach(function(a){html+='<tr><td lang="en">'+esc(a.auctioneer)+'</td><td class="n">'+inr(a.avg)+'</td><td class="n">'+inr(a.max)+'</td><td class="n">'+n(Math.round(a.sold_kg||0))+' ಕೆ.ಜಿ.</td></tr>'});
     html+='</tbody></table>';
