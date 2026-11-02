@@ -1,0 +1,116 @@
+<style>
+.egpc{--fg:#CFDCCF;--muted:rgba(207,220,207,.72);--line:rgba(207,220,207,.18);--card:rgba(255,255,255,.04);--panel:#163223;--accent:rgb(232,101,60);--crop:#8fb3d9;--wsb:#c9845a;--cbb:#d5655c;--sap:#e0b04a;--cat:#b9c36a;--ally:#7cc495;color:var(--fg);font:16.5px/1.6 Roboto,system-ui,sans-serif;text-align:left}
+.egpc *{box-sizing:border-box}
+.egpc p{margin:0}
+.egpc .ttl{margin:0 0 14px;font:400 clamp(38px,4.75vw,66px)/0.97 Roboto,sans-serif;color:var(--fg);letter-spacing:-.01em}
+.egpc .kick{font-size:20px;color:#F3EFE4;margin:0 0 16px;max-width:60ch}
+.egpc a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.egpc .lead{max-width:66ch;margin:0 0 14px}
+.egpc .disc{max-width:80ch;margin:0 0 24px;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;background:var(--card);font-size:14.5px;line-height:1.5}
+.egpc .two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+.egpc .two>div{min-width:0}
+.egpc .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.egpc table{border-collapse:separate;border-spacing:3px;width:100%;min-width:600px;font-size:14px}
+.egpc th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:0}
+.egpc thead th button{font:inherit;border:0;border-radius:6px;padding:5px 0;width:100%;font-size:12px;letter-spacing:.06em;color:var(--muted);background:transparent;cursor:pointer}
+.egpc thead th button:hover{color:var(--fg)}
+.egpc thead th button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.egpc button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.egpc tbody th,.egpc thead th:first-child{position:sticky;left:0;background:var(--panel);z-index:1}
+.egpc tbody th{text-align:left;text-transform:none;letter-spacing:0;font-size:14px;color:var(--fg);white-space:nowrap;padding-right:10px;font-weight:500}
+.egpc tbody th small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+.egpc td{height:28px;border-radius:4px;background:rgba(207,220,207,.06);cursor:pointer;padding:0}
+.egpc td.gap{background:none;cursor:default}
+.egpc td.on{background:var(--c)}
+.egpc td.soft{background:var(--c);opacity:.45}
+.egpc td.sel{box-shadow:inset 0 0 0 2px #F3EFE4}
+.egpc td.sel.soft{opacity:.7}
+.egpc tr.grp th{padding-top:12px;color:var(--accent);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.egpc .key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted);margin-top:10px}
+.egpc .key span{display:inline-flex;align-items:center;gap:6px}
+.egpc .key i{width:14px;height:14px;border-radius:3px;background:var(--fg);display:inline-block}
+.egpc .key i.s{opacity:.45}
+.egpc .mon{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.egpc .mon h2{margin:0;font-size:26px;line-height:1.2;color:var(--accent);font-weight:500}
+.egpc .mon .lab{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.egpc .mon ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.egpc .mon li{display:grid;grid-template-columns:12px minmax(0,1fr);gap:10px;align-items:start;font-size:15px;line-height:1.5}
+.egpc .mon li i{width:12px;height:12px;border-radius:3px;margin-top:6px;background:var(--c)}
+.egpc .mon li em{color:var(--muted)}
+.egpc .nav{display:flex;gap:8px;margin-top:4px}
+.egpc .nav button{font:inherit;font-size:14px;color:var(--fg);background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.egpc .nav button:hover{border-color:var(--accent)}
+.egpc .refs{margin-top:28px;font-size:13.5px;color:var(--muted);max-width:90ch}
+.egpc .refs h3{font-size:15px;font-weight:500;color:var(--fg);margin:0 0 6px}
+.egpc .refs ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.egpc .refs a{color:var(--muted)}
+@media (max-width:900px){.egpc .two{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.egpc .kick{font-size:18px}.egpc tbody th small{display:none}.egpc tbody th{white-space:normal;min-width:108px;max-width:124px;font-size:13px}.egpc table{min-width:540px}}
+</style>
+<div class="egpc" id="egpc" lang="en">
+<h1 class="ttl">Coffee Pest Calendar</h1>
+<p class="kick">Which pests to watch for on a Malnad coffee plantation, month by month, and which natural allies are at work</p>
+<p class="lead">Each row shows when a pest or an ally is most active through the coffee year. Tap a month to see what to watch for and what helps. The calendar opens on the current month. To see how the hunters respond when a pest does break out, try <a href="/pest-outbreak">What Happens in a Pest Outbreak</a>, and for every link in the food web, <a href="/who-eats-whom">Who Eats Whom</a>.</p>
+<div class="disc" role="note"><strong>A guide, not a forecast.</strong> Timings are approximate and shift with altitude, rainfall and the year. Check the Coffee Board of India's advisories and what you see on your own plantation before acting.</div>
+<div class="two">
+<div>
+<div class="scroll" id="egpc-scroll"><table id="egpc-tab" aria-label="Coffee pest calendar"></table></div>
+<div class="key"><span><i></i> Peak activity</span><span><i class="s"></i> Lesser activity</span></div>
+</div>
+<div class="mon" id="egpc-mon" aria-live="polite"></div>
+</div>
+<div class="refs">
+<h3>Sources</h3>
+<ol>
+<li>Coffee Board of India. White stem borer, <a href="https://coffeeboard.gov.in/Planter/wsb2-Bio-ecology(1).pdf" target="_blank" rel="noopener">bio-ecology</a> (two emergence peaks, April–May and October–December) and <a href="https://coffeeboard.gov.in/Planter/wsb3-Mgt-Cul(1).pdf" target="_blank" rel="noopener">cultural management</a> (remove and burn infested stems before mid-September; keep shade at the right level during flight periods).</li>
+<li>Coffee berry borer enters green berries from about 120–150 days after flowering until harvest; infested gleanings carry it to the next season (<a href="https://journalsofindia.com/berry-borer-infestation-in-coffee/" target="_blank" rel="noopener">summary of Coffee Board guidance</a>).</li>
+<li>FAO. <a href="https://www.fao.org/3/ae939e/ae939e0b.htm" target="_blank" rel="noopener">Coffee pests</a>: mealybugs are generally more of a problem in the dry season, and heavy outbreaks often follow insecticide sprays that kill their natural enemies.</li>
+<li>Caterpillars on shade trees, the natural enemies, frogs and coral trees: our pages <a href="/pest-outbreak">What Happens in a Pest Outbreak</a> and <a href="/who-eats-whom">Who Eats Whom</a>, and the references listed there.</li>
+</ol>
+</div>
+</div>
+<script>
+(function(){
+var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var MF=['January','February','March','April','May','June','July','August','September','October','November','December'];
+/* 2 = peak, 1 = lesser activity */
+var ROWS=[
+{g:'The coffee year'},
+{id:'blossom',k:'crop',n:'Blossom showers',s:'<em>Coffea arabica</em>, <em>C. canephora</em>',c:'--crop',m:[0,2,2,1,0,0,0,0,0,0,0,0],t:'The first good showers bring the coffee into flower, and the berry borer’s clock starts.'},
+{id:'monsoon',k:'crop',n:'Monsoon',s:'',c:'--crop',m:[0,0,0,0,1,2,2,2,1,0,0,0],t:'Heavy rain. Frogs breed and the canopy is at its busiest with insects.'},
+{id:'harvest',k:'crop',n:'Harvest',s:'',c:'--crop',m:[2,1,0,0,0,0,0,0,0,0,1,2],t:'Picking season. Leave no berries behind on the bushes or the ground: gleanings carry the berry borer into next year [2].'},
+{g:'Pests to watch'},
+{id:'wsb',k:'pest',n:'White stem borer',s:'<em>Xylotrechus quadripes</em>',c:'--wsb',m:[0,0,0,2,2,0,0,0,1,2,2,2],t:'Beetles emerge and lay eggs in two peaks, April–May and October–December [1]. Keep two tiers of shade over the coffee, and trace and burn infested stems before mid-September [1].',a:'/pest-outbreak'},
+{id:'cbb',k:'pest',n:'Coffee berry borer',s:'<em>Hypothenemus hampei</em>',c:'--cbb',m:[1,1,1,0,0,0,1,2,2,2,1,0],t:'Bores into green berries from about four to five months after blossom until harvest [2]. Ants and insect-eating birds help keep it down; after picking, collect the gleanings so it has nowhere to wait.',a:'/pest-outbreak'},
+{id:'sap',k:'pest',n:'Mealybugs and green scale',s:'Pseudococcidae, <em>Coccus viridis</em>',c:'--sap',m:[2,2,2,2,1,0,0,0,0,0,0,1],t:'Worst in the dry months [3]. Lady beetles, parasitic wasps and, in wet weather, a white fungus keep them in check; sprays often make outbreaks worse by killing these first [3].',a:'/pest-outbreak'},
+{id:'cat',k:'pest',n:'Caterpillars on shade trees',s:'<em>Eupterote</em> sp. and others',c:'--cat',m:[0,0,0,0,1,2,1,0,0,0,0,0],t:'After the first rains, caterpillars can swarm over the shade trees. Wasps, mantises, ants, frogs, spiders and birds usually bring numbers back down [4].',a:'/pest-outbreak'},
+{g:'Allies at work'},
+{id:'frogs',k:'ally',n:'Frogs breeding',s:'<em>Rhacophorus</em>, <em>Raorchestes</em> and others',c:'--ally',m:[0,0,0,0,1,2,2,2,1,0,0,0],t:'Frogs call and breed through the monsoon, hunting beetles, caterpillars and ants at night [4].',a:'/who-eats-whom'},
+{id:'coral',k:'ally',n:'Coral trees in flower',s:'<em>Erythrina variegata</em>',c:'--ally',m:[2,2,1,0,0,0,0,0,0,0,0,1],t:'A dry-season nectar station that keeps bulbuls, drongos, starlings and other insect-eating birds on the plantation [4].',a:'/who-eats-whom'},
+{id:'ants',k:'ally',n:'Ants hunting',s:'many species',c:'--ally',m:[1,1,1,1,1,1,1,1,1,1,1,1],t:'Active all year. They catch berry borers in the open and attack caterpillars [4].',a:'/who-eats-whom'}
+];
+var LINK={'/pest-outbreak':'See it in the pest outbreak','/who-eats-whom':'See it in the food web'};
+var sel=new Date().getMonth(), first=true;
+var tab=document.getElementById('egpc-tab'), mon=document.getElementById('egpc-mon'), sc=document.getElementById('egpc-scroll');
+function draw(){
+ var h='<thead><tr><th scope="col"></th>'+M.map(function(m,i){return '<th scope="col"><button type="button" data-m="'+i+'" aria-pressed="'+(i===sel)+'" aria-label="'+MF[i]+'">'+m+'</button></th>'}).join('')+'</tr></thead><tbody>';
+ ROWS.forEach(function(R){
+  if(R.g){h+='<tr class="grp"><th scope="rowgroup">'+R.g+'</th><td colspan="12" class="gap"></td></tr>';return}
+  h+='<tr><th scope="row">'+R.n+(R.s?'<small>'+R.s+'</small>':'')+'</th>'+R.m.map(function(v,i){return '<td data-m="'+i+'" style="--c:var('+R.c+')" class="'+(v===2?'on':v===1?'soft':'')+(i===sel?' sel':'')+'" title="'+R.n+', '+MF[i]+(v===2?': peak':v===1?': lesser activity':'')+'"></td>'}).join('')+'</tr>'});
+ tab.innerHTML=h+'</tbody>';
+ Array.prototype.forEach.call(tab.querySelectorAll('[data-m]'),function(b){b.onclick=function(){sel=+b.getAttribute('data-m');draw()}});
+ var act=ROWS.filter(function(R){return !R.g&&R.m[sel]>0});
+ function li(R){return '<li style="--c:var('+R.c+')"><i></i><div><strong>'+R.n+(R.m[sel]===2?' (peak)':'')+'.</strong> '+R.t+(R.a?' <a href="'+R.a+'">'+LINK[R.a]+'</a>':'')+'</div></li>'}
+ function grp(k){return act.filter(function(R){return R.k===k})}
+ var p=grp('pest'),a=grp('ally'),c=grp('crop');
+ mon.innerHTML='<h2>'+MF[sel]+'</h2>'+(c.length?'<ul>'+c.map(li).join('')+'</ul>':'')+
+  '<div class="lab">Watch for</div>'+(p.length?'<ul>'+p.map(li).join('')+'</ul>':'<p>No major pest peaks this month.</p>')+
+  (a.length?'<div class="lab">Allies at work</div><ul>'+a.map(li).join('')+'</ul>':'')+
+  '<div class="nav"><button type="button" data-d="-1">← '+MF[(sel+11)%12]+'</button><button type="button" data-d="1">'+MF[(sel+1)%12]+' →</button></div>';
+ Array.prototype.forEach.call(mon.querySelectorAll('[data-d]'),function(b){b.onclick=function(){sel=(sel+12+(+b.getAttribute('data-d')))%12;draw()}});
+ var cell=tab.querySelector('thead [data-m="'+sel+'"]');
+ if(sc&&cell&&sc.scrollWidth>sc.clientWidth){var lab=tab.querySelector('tbody th:not([colspan])');var x=cell.parentNode.offsetLeft-(lab?lab.offsetWidth:0)-cell.offsetWidth*2;sc.scrollLeft=Math.max(0,x)}
+ first=false}
+draw();
+})();
+</script>
