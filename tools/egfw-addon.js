@@ -9,6 +9,7 @@ const T=KN?{
  none:'ಯಾವ ನೈಸರ್ಗಿಕ ಶತ್ರುವೂ ಉಳಿಯದ ಪೀಡೆಗಳು',few:'ನೈಸರ್ಗಿಕ ಶತ್ರುಗಳು ಕಡಿಮೆಯಾದ ಪೀಡೆಗಳು',
  left:(a,b)=>`${b}ರಲ್ಲಿ ${a} ಉಳಿದಿವೆ`,
  hungry:'ಈ ಜಾಲದಲ್ಲಿ ತಮ್ಮ ಆಹಾರದ ಅರ್ಧಕ್ಕಿಂತ ಹೆಚ್ಚನ್ನು ಕಳೆದುಕೊಳ್ಳುವ ಜೀವಿಗಳು',
+ shadeDep:a=>`ನೆರಳು ಮರಗಳೊಂದಿಗೆ ಅವುಗಳನ್ನೇ ಅವಲಂಬಿಸಿರುವ ಜೀವಿಗಳೂ ಹೋಗುತ್ತವೆ: ಹೆಚ್ಚಿನ ಹಣ್ಣು ತಿನ್ನುವ ಹಕ್ಕಿಗಳು, ಕಾಡಿನ ಕೀಟ ತಿನ್ನುವ ಹಕ್ಕಿಗಳು ಮತ್ತು ಕೆಲವು ಕಪ್ಪೆಗಳು. ${a.join(', ')} ಮುಂತಾದ ಬಯಲಿನ ಹಕ್ಕಿಗಳು ಉಳಿಯುತ್ತವೆ.`,
  shadeNote:'ಕಾಂಡ ಕೊರಕದ ವಿರುದ್ಧ ನೆರಳೇ ಮುಖ್ಯ ರಕ್ಷಣೆ; ನೆರಳು ಮರಗಳನ್ನು ಕಡಿದರೆ ಅದು ಹೋಗುತ್ತದೆ.',
  nothing:'ಈ ಜಾಲದಲ್ಲಿ ಯಾವ ಪೀಡೆಯೂ ತನ್ನ ಶತ್ರುಗಳನ್ನು ಕಳೆದುಕೊಳ್ಳುವುದಿಲ್ಲ.',
  caveat:'ಇದು ಇಲ್ಲಿ ತೋರಿಸಿರುವ ಸಂಬಂಧಗಳನ್ನು ಮಾತ್ರ ಎಣಿಸುತ್ತದೆ. ನಿಜವಾದ ತೋಟದಲ್ಲಿ ಇನ್ನೂ ಹೆಚ್ಚು ಜೀವಿಗಳು ಮತ್ತು ಸಂಬಂಧಗಳಿವೆ; ಆದ್ದರಿಂದ ಇದು ಬದಲಾವಣೆಯ ದಿಕ್ಕನ್ನು ತೋರಿಸುತ್ತದೆ, ಎಷ್ಟು ಎಂದಲ್ಲ.',
@@ -23,6 +24,7 @@ const T=KN?{
  none:'Pests left with no natural enemies here',few:'Pests with fewer natural enemies',
  left:(a,b)=>`${a} of ${b} left`,
  hungry:'Species that lose more than half their food on this web',
+ shadeDep:a=>`The birds and frogs that need the canopy go with it: most fruit-eating birds, the forest insect-eaters, and the canopy and forest-floor frogs. Birds of open country, such as ${a.join(', ')}, stay.`,
  shadeNote:'Shade is the main defence against the white stem borer; cutting the shade trees removes it.',
  nothing:'No pest loses any of its enemies on this web.',
  caveat:'This counts only the links drawn here. A real plantation has more species and links, so it shows the direction of change, not its size.',
@@ -58,7 +60,9 @@ document.head.appendChild(css);
 const WI={spray:false,noshade:false,nobirds:false};
 const PESTS=['cbb','wsb','scale','rats'].concat(SCEN.cat.focus).filter(p=>byId[p]);
 const BIRDS=N.filter(n=>n[3]==='t2').map(n=>n[0]);
-function removedSet(){const r=new Set();if(WI.spray)SPRAYKILL.forEach(x=>r.add(x));if(WI.noshade)(G.trees||[]).forEach(x=>r.add(x));if(WI.nobirds)BIRDS.forEach(x=>r.add(x));return r}
+// species that need the native canopy: most fruit-eating birds, forest insect-eaters, canopy and forest-floor frogs
+const SHADEDEP=['barbet','bluebird','starling','sqbulbul','oriole','parrot','trogon','leafbird','blackbird','malglide','winged','dotfrog'].filter(x=>byId[x]);
+function removedSet(){const r=new Set();if(WI.spray)SPRAYKILL.forEach(x=>r.add(x));if(WI.noshade){(G.trees||[]).forEach(x=>r.add(x));SHADEDEP.forEach(x=>r.add(x))}if(WI.nobirds)BIRDS.forEach(x=>r.add(x));return r}
 function wiCalc(){const R=removedSet();const res={R,none:[],few:[],hungry:[]};if(!R.size)return res;
 PESTS.forEach(p=>{if(R.has(p))return;const en=predsOf([p]);const left=en.filter(x=>!R.has(x));if(!en.length)return;if(!left.length)res.none.push([p,0,en.length]);else if(left.length<en.length)res.few.push([p,left.length,en.length])});
 Object.keys(byId).forEach(a=>{if(R.has(a)||PESTS.includes(a))return;const food=[...new Set(E.filter(e=>e.a===a&&(e.type==='eats'||e.type==='feeds')).map(e=>e.b))];if(food.length<2)return;const lost=food.filter(b=>R.has(b)).length;if(lost*2>food.length)res.hungry.push(a)});
@@ -72,6 +76,7 @@ const nm=id=>`<button data-go="${id}">${byId[id].name}</button>`;
 function wiResults(){const r=wiCalc();if(!r.R.size)return '';let h=`<p>${T.removed(r.R.size)}</p>`;
 if(r.none.length)h+=`<p><b>${T.none}</b></p><ul>${r.none.map(([p,a,b])=>`<li>${nm(p)} (${T.left(a,b)})</li>`).join('')}</ul>`;
 if(r.few.length)h+=`<p><b>${T.few}</b></p><ul>${r.few.map(([p,a,b])=>`<li>${nm(p)} (${T.left(a,b)})</li>`).join('')}</ul>`;
+if(WI.noshade)h+=`<p>${T.shadeDep(['drongo','gbee','rvbulbul'].filter(x=>byId[x]).map(x=>byId[x].name))}</p>`;
 if(WI.noshade&&byId.wsb)h+=`<p>${T.shadeNote}</p>`;
 if(!r.none.length&&!r.few.length)h+=`<p>${T.nothing}</p>`;
 if(r.hungry.length)h+=`<p><b>${T.hungry}</b></p><p>${r.hungry.map(nm).join(', ')}</p>`;
