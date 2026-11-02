@@ -120,7 +120,7 @@ const _render=renderScen;renderScen=function(anim){_render(anim);const q=Q[scen]
 const a=ANS[scen];const chips=panel.querySelector('.chips');if(!chips)return;
 const box=document.createElement('div');box.className='gq';
 box.innerHTML=`<h3>${T.qH}</h3><p class="q">${q[0]}</p><div class="opts">${q[1].map((o,i)=>`<button type="button" data-q="${i}" class="${a==null||a==='skip'?'':(i===q[2]?'ok':(i===a?'no':''))}">${o}</button>`).join('')}</div>`+
-(a==null?`<button type="button" class="lk" data-skip>${T.skip}</button>`:(a==='skip'?'':`<p class="fb"><b>${a===q[2]?T.right:T.wrong}</b> ${a===q[2]?'':T.ans+' '+q[1][q[2]]+'. '}${q[3]}</p><p class="fb">${T.play}</p><button type="button" class="lk" data-again>${T.again}</button>`));
+(a==null?`<button type="button" class="lk" data-skip>${T.skip}</button>`:(a==='skip'?'':`<p class="fb"><b>${a===q[2]?T.right:T.wrong}</b> ${a===q[2]?'':T.ans+' '+q[1][q[2]].replace(/[.।]$/,'')+'. '}${q[3]}</p><p class="fb">${T.play}</p><button type="button" class="lk" data-again>${T.again}</button>`));
 chips.insertAdjacentElement('afterend',box);
 if(a==null){['.playrow','.stepnav'].forEach(s=>panel.querySelector(s)?.classList.add('gqlock'));stopPlay()}
 box.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{if(ANS[scen]!=null&&ANS[scen]!=='skip')return;ANS[scen]=+b.dataset.q;renderScen(false);panel.querySelector('.gq .fb')?.scrollIntoView({block:'nearest'})});
