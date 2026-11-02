@@ -1,0 +1,119 @@
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet"><style>
+.egpc{--fg:#CFDCCF;--muted:rgba(207,220,207,.72);--line:rgba(207,220,207,.18);--card:rgba(255,255,255,.04);--panel:rgb(16,38,27);--accent:rgb(232,101,60);--crop:#8fb3d9;--wsb:#c9845a;--cbb:#d5655c;--sap:#e0b04a;--cat:#b9c36a;--ally:#7cc495;color:var(--fg);font:16.5px/1.7 'Noto Sans Kannada',Roboto,system-ui,sans-serif;text-align:left}
+.egpc *{box-sizing:border-box}
+.egpc p{margin:0}
+.egpc .ttl{margin:0 0 14px;font:500 clamp(34px,4.4vw,58px)/1.2 'Noto Sans Kannada',Roboto,sans-serif;color:var(--fg);letter-spacing:-.01em}
+.egpc .kick{font-size:20px;color:#F3EFE4;margin:0 0 16px;max-width:60ch}
+.egpc a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.egpc .lead{max-width:66ch;margin:0 0 14px}
+.egpc .disc{max-width:80ch;margin:0 0 24px;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;background:var(--card);font-size:14.5px;line-height:1.5}
+.egpc .two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+.egpc .two>div{min-width:0}
+.egpc .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.egpc table{border-collapse:separate;border-spacing:3px;width:100%;min-width:600px;font-size:14px}
+.egpc th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:0}
+.egpc thead th button{font:inherit;border:0;border-radius:6px;padding:5px 0;width:100%;font-size:12px;letter-spacing:.06em;color:var(--muted);background:transparent;cursor:pointer}
+.egpc thead th button:hover{color:var(--fg)}
+.egpc thead th button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.egpc button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.egpc tbody th,.egpc thead th:first-child{position:sticky;left:0;background:var(--panel);z-index:1;box-shadow:0 0 0 3px var(--panel)}
+.egpc tbody th{text-align:left;text-transform:none;letter-spacing:0;font-size:14px;color:var(--fg);white-space:nowrap;padding-right:10px;font-weight:500}
+.egpc tbody th small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+.egpc td{height:28px;border-radius:4px;background:rgba(207,220,207,.06);cursor:pointer;padding:0}
+.egpc td.gap{background:none;cursor:default}
+.egpc td.on{background:var(--c)}
+.egpc td.soft{background:var(--c);opacity:.45}
+.egpc td.sel{box-shadow:inset 0 0 0 2px #F3EFE4}
+.egpc td.sel.soft{opacity:.7}
+.egpc tr.grp th{padding-top:12px;color:var(--accent);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.egpc .key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted);margin-top:10px}
+.egpc .key span{display:inline-flex;align-items:center;gap:6px}
+.egpc .key i{width:14px;height:14px;border-radius:3px;background:var(--fg);display:inline-block}
+.egpc .key i.s{opacity:.45}
+.egpc .mon{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.egpc .mon h2{margin:0;font-size:26px;line-height:1.2;color:var(--accent);font-weight:500}
+.egpc .mon .lab{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.egpc .mon ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.egpc .mon li{display:grid;grid-template-columns:12px minmax(0,1fr);gap:10px;align-items:start;font-size:15px;line-height:1.5}
+.egpc .mon li i{width:12px;height:12px;border-radius:3px;margin-top:6px;background:var(--c)}
+.egpc .mon li em{color:var(--muted)}
+.egpc .nav{display:flex;gap:8px;margin-top:4px}
+.egpc .nav button{font:inherit;font-size:14px;color:var(--fg);background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.egpc .nav button:hover{border-color:var(--accent)}
+.egpc .refs{margin-top:28px;font-size:13.5px;color:var(--muted);max-width:90ch}
+.egpc .refs h3{font-size:15px;font-weight:500;color:var(--fg);margin:0 0 6px}
+.egpc .refs ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.egpc .refs a{color:var(--muted)}
+@media (max-width:1100px){.egpc .two{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.egpc .kick{font-size:18px}.egpc tbody th small{display:none}.egpc tbody th{white-space:normal;min-width:108px;max-width:124px;font-size:13px}.egpc table{min-width:540px}}
+.egpc th,.egpc thead th button,.egpc tr.grp th,.egpc .mon .lab{letter-spacing:0;text-transform:none}
+.egpc thead th button{font-size:12.5px}
+.egpc tr.grp th{font-size:13px}
+</style>
+<div class="egpc" id="egpc" lang="kn">
+<h1 class="ttl">ಕಾಫಿ ಪೀಡೆ ಕೀಟಗಳ ಕ್ಯಾಲೆಂಡರ್</h1>
+<p class="kick">ಮಲೆನಾಡಿನ ಕಾಫಿ ತೋಟದಲ್ಲಿ ತಿಂಗಳಿಂದ ತಿಂಗಳಿಗೆ ಯಾವ ಪೀಡೆ ಕೀಟಗಳನ್ನು ಗಮನಿಸಬೇಕು, ಮತ್ತು ಯಾವ ನೈಸರ್ಗಿಕ ಮಿತ್ರರು ಕೆಲಸದಲ್ಲಿರುತ್ತಾರೆ</p>
+<p class="lead">ಕಾಫಿ ವರ್ಷದಲ್ಲಿ ಒಂದು ಪೀಡೆ ಕೀಟ ಅಥವಾ ಮಿತ್ರ ಜೀವಿ ಯಾವಾಗ ಹೆಚ್ಚು ಚುರುಕಾಗಿರುತ್ತದೆ ಎಂದು ಪ್ರತಿಯೊಂದು ಸಾಲು ತೋರಿಸುತ್ತದೆ. ಏನನ್ನು ಗಮನಿಸಬೇಕು, ಯಾವುದು ನೆರವಾಗುತ್ತದೆ ಎಂದು ನೋಡಲು ಒಂದು ತಿಂಗಳನ್ನು ಒತ್ತಿ. ಕ್ಯಾಲೆಂಡರ್ ಈ ತಿಂಗಳಿನಿಂದಲೇ ತೆರೆದುಕೊಳ್ಳುತ್ತದೆ. ಹಾವಳಿ ಬಂದಾಗ ಬೇಟೆಗಾರ ಜೀವಿಗಳು ಹೇಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತವೆ ಎಂದು ನೋಡಲು <a href="/pest-outbreak-kannada">ಕೀಟಗಳ ಹಾವಳಿ ಬಂದಾಗ ಏನಾಗುತ್ತದೆ</a> ಪುಟವನ್ನು, ಆಹಾರ ಜಾಲದ ಎಲ್ಲ ಸಂಬಂಧಗಳಿಗೆ <a href="/who-eats-whom-kannada">ಯಾರಿಗೆ ಯಾರು ಆಹಾರ?</a> ಪುಟವನ್ನು ನೋಡಿ.</p>
+<div class="disc" role="note"><strong>ಇದು ಮಾರ್ಗದರ್ಶಿ ಮಾತ್ರ, ಮುನ್ಸೂಚನೆ ಅಲ್ಲ.</strong> ಇಲ್ಲಿನ ಸಮಯಗಳು ಅಂದಾಜು; ಎತ್ತರ, ಮಳೆ ಮತ್ತು ವರ್ಷಕ್ಕೆ ತಕ್ಕಂತೆ ಬದಲಾಗುತ್ತವೆ. ಯಾವುದೇ ಕ್ರಮ ಕೈಗೊಳ್ಳುವ ಮೊದಲು ಕಾಫಿ ಮಂಡಳಿಯ ಸಲಹೆಗಳನ್ನೂ ನಿಮ್ಮ ತೋಟದಲ್ಲಿ ನೀವು ಕಾಣುವುದನ್ನೂ ಪರಿಶೀಲಿಸಿ.</div>
+<div class="two">
+<div>
+<div class="scroll" id="egpc-scroll"><table id="egpc-tab" aria-label="ಕಾಫಿ ಪೀಡೆ ಕೀಟಗಳ ಕ್ಯಾಲೆಂಡರ್"></table></div>
+<div class="key"><span><i></i> ಗರಿಷ್ಠ ಚಟುವಟಿಕೆ</span><span><i class="s"></i> ಕಡಿಮೆ ಚಟುವಟಿಕೆ</span></div>
+</div>
+<div class="mon" id="egpc-mon" aria-live="polite"></div>
+</div>
+<div class="refs">
+<h3>ಆಧಾರಗಳು</h3>
+<ol>
+<li>ಕಾಫಿ ಮಂಡಳಿ (Coffee Board of India). ಕಾಂಡ ಕೊರಕ: <a href="https://coffeeboard.gov.in/Planter/wsb2-Bio-ecology(1).pdf" target="_blank" rel="noopener">ಜೀವನ ಚಕ್ರ</a> (ದುಂಬಿಗಳು ಹೊರಬರುವ ಎರಡು ಮುಖ್ಯ ಅವಧಿಗಳು: ಏಪ್ರಿಲ್–ಮೇ ಮತ್ತು ಅಕ್ಟೋಬರ್–ಡಿಸೆಂಬರ್) ಮತ್ತು <a href="https://coffeeboard.gov.in/Planter/wsb3-Mgt-Cul(1).pdf" target="_blank" rel="noopener">ಬೇಸಾಯ ಕ್ರಮಗಳಿಂದ ನಿರ್ವಹಣೆ</a> (ಬಾಧಿತ ಕಾಂಡಗಳನ್ನು ಸೆಪ್ಟೆಂಬರ್ ಮಧ್ಯದೊಳಗೆ ತೆಗೆದು ಸುಡಿ; ದುಂಬಿಗಳು ಹಾರುವ ಅವಧಿಯಲ್ಲಿ ನೆರಳನ್ನು ಸರಿಯಾದ ಮಟ್ಟದಲ್ಲಿಡಿ). ಎರಡೂ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿವೆ.</li>
+<li>ಕಾಫಿ ಕಾಯಿ ಕೊರಕ ಹೂಬಿಟ್ಟ ಸುಮಾರು 120–150 ದಿನಗಳ ನಂತರದಿಂದ ಕೊಯ್ಲಿನವರೆಗೆ ಹಸಿರು ಕಾಯಿಗಳನ್ನು ಕೊರೆಯುತ್ತದೆ; ಬಾಧಿತ ಉದುರು ಕಾಯಿಗಳು ಅದನ್ನು ಮುಂದಿನ ಹಂಗಾಮಿಗೆ ಒಯ್ಯುತ್ತವೆ (<a href="https://journalsofindia.com/berry-borer-infestation-in-coffee/" target="_blank" rel="noopener">ಕಾಫಿ ಮಂಡಳಿಯ ಸಲಹೆಯ ಸಾರಾಂಶ</a>, ಇಂಗ್ಲಿಷ್).</li>
+<li>FAO, <a href="https://www.fao.org/3/ae939e/ae939e0b.htm" target="_blank" rel="noopener">Coffee pests</a> (ಇಂಗ್ಲಿಷ್): ರಸ ಹೀರುವ Pseudococcidae ಕೀಟಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಒಣ ಹವಾಮಾನದಲ್ಲಿ ಹೆಚ್ಚು ತೊಂದರೆ ಕೊಡುತ್ತವೆ; ಅವುಗಳ ನೈಸರ್ಗಿಕ ಶತ್ರುಗಳನ್ನು ಕೊಲ್ಲುವ ಕೀಟನಾಶಕ ಸಿಂಪಡಣೆಯ ನಂತರ ದೊಡ್ಡ ಹಾವಳಿ ಬರುವುದು ಸಾಮಾನ್ಯ.</li>
+<li>ನೆರಳು ಮರಗಳ ಮೇಲಿನ ಕಂಬಳಿಹುಳುಗಳು, ನೈಸರ್ಗಿಕ ಶತ್ರುಗಳು, ಕಪ್ಪೆಗಳು ಮತ್ತು ಹಾರುವಾಣ ಮರಗಳು: ನಮ್ಮ <a href="/pest-outbreak-kannada">ಕೀಟಗಳ ಹಾವಳಿ ಬಂದಾಗ ಏನಾಗುತ್ತದೆ</a> ಮತ್ತು <a href="/who-eats-whom-kannada">ಯಾರಿಗೆ ಯಾರು ಆಹಾರ?</a> ಪುಟಗಳು ಮತ್ತು ಅಲ್ಲಿ ನೀಡಿರುವ ಆಧಾರಗಳು.</li>
+</ol>
+</div>
+</div>
+<script>
+(function(){
+var M=['ಜನ','ಫೆಬ್ರ','ಮಾರ್ಚ್','ಏಪ್ರಿ','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗ','ಸೆಪ್ಟೆಂ','ಅಕ್ಟೋ','ನವೆಂ','ಡಿಸೆಂ'];
+var MF=['ಜನವರಿ','ಫೆಬ್ರವರಿ','ಮಾರ್ಚ್','ಏಪ್ರಿಲ್','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗಸ್ಟ್','ಸೆಪ್ಟೆಂಬರ್','ಅಕ್ಟೋಬರ್','ನವೆಂಬರ್','ಡಿಸೆಂಬರ್'];
+/* 2 = peak, 1 = lesser activity */
+var ROWS=[
+{g:'ಕಾಫಿ ವರ್ಷ'},
+{id:'blossom',k:'crop',n:'ಹೂಮಳೆ',s:'<em>Coffea arabica</em>, <em>C. canephora</em>',c:'--crop',m:[0,2,2,1,0,0,0,0,0,0,0,0],t:'ಮೊದಲ ಉತ್ತಮ ಮಳೆಗಳು ಕಾಫಿಯನ್ನು ಹೂಬಿಡಿಸುತ್ತವೆ; ಕಾಯಿ ಕೊರಕದ ಗಡಿಯಾರ ಇಲ್ಲಿಂದ ಶುರುವಾಗುತ್ತದೆ.'},
+{id:'monsoon',k:'crop',n:'ಮುಂಗಾರು',s:'',c:'--crop',m:[0,0,0,0,1,2,2,2,1,0,0,0],t:'ಜೋರು ಮಳೆ. ಕಪ್ಪೆಗಳು ಮೊಟ್ಟೆ ಇಡುತ್ತವೆ, ಮತ್ತು ಮರಗಳ ಹಸಿರು ಹೊದಿಕೆಯಲ್ಲಿ ಕೀಟಗಳು ಅತಿ ಹೆಚ್ಚು ಇರುತ್ತವೆ.'},
+{id:'harvest',k:'crop',n:'ಕೊಯ್ಲು',s:'',c:'--crop',m:[2,1,0,0,0,0,0,0,0,0,1,2],t:'ಕಾಫಿ ಕೊಯ್ಲಿನ ಕಾಲ. ಗಿಡಗಳಲ್ಲಾಗಲಿ ನೆಲದ ಮೇಲಾಗಲಿ ಕಾಯಿಗಳನ್ನು ಬಿಡಬೇಡಿ: ಉಳಿದ ಉದುರು ಕಾಯಿಗಳು ಕಾಯಿ ಕೊರಕವನ್ನು ಮುಂದಿನ ವರ್ಷಕ್ಕೆ ಒಯ್ಯುತ್ತವೆ [2].'},
+{g:'ಗಮನಿಸಬೇಕಾದ ಪೀಡೆ ಕೀಟಗಳು'},
+{id:'wsb',k:'pest',n:'ಕಾಂಡ ಕೊರಕ',s:'<em>Xylotrechus quadripes</em>',c:'--wsb',m:[0,0,0,2,2,0,0,0,1,2,2,2],t:'ದುಂಬಿಗಳು ಎರಡು ಅವಧಿಗಳಲ್ಲಿ ಹೆಚ್ಚಾಗಿ ಹೊರಬಂದು ಮೊಟ್ಟೆ ಇಡುತ್ತವೆ: ಏಪ್ರಿಲ್–ಮೇ ಮತ್ತು ಅಕ್ಟೋಬರ್–ಡಿಸೆಂಬರ್ [1]. ಕಾಫಿಯ ಮೇಲೆ ಎರಡು ಹಂತದ ನೆರಳು ಇರಲಿ, ಮತ್ತು ಬಾಧಿತ ಕಾಂಡಗಳನ್ನು ಗುರುತಿಸಿ ಸೆಪ್ಟೆಂಬರ್ ಮಧ್ಯದೊಳಗೆ ಸುಟ್ಟುಹಾಕಿ [1].',a:'/pest-outbreak-kannada'},
+{id:'cbb',k:'pest',n:'ಕಾಫಿ ಕಾಯಿ ಕೊರಕ',s:'<em>Hypothenemus hampei</em>',c:'--cbb',m:[1,1,1,0,0,0,1,2,2,2,1,0],t:'ಹೂಬಿಟ್ಟ ಸುಮಾರು ನಾಲ್ಕರಿಂದ ಐದು ತಿಂಗಳ ನಂತರದಿಂದ ಕೊಯ್ಲಿನವರೆಗೆ ಹಸಿರು ಕಾಯಿಗಳನ್ನು ಕೊರೆಯುತ್ತದೆ [2]. ಇರುವೆಗಳು ಮತ್ತು ಕೀಟ ತಿನ್ನುವ ಹಕ್ಕಿಗಳು ಅದನ್ನು ಹತೋಟಿಯಲ್ಲಿಡಲು ನೆರವಾಗುತ್ತವೆ; ಕೊಯ್ಲಿನ ನಂತರ ಉದುರು ಕಾಯಿಗಳನ್ನು ಆರಿಸಿ, ಅದು ಕಾದು ಕೂರಲು ಜಾಗವಿಲ್ಲದಂತೆ ಮಾಡಿ.',a:'/pest-outbreak-kannada'},
+{id:'sap',k:'pest',n:'ರಸ ಹೀರುವ ಕೀಟಗಳು',s:'Pseudococcidae, <em>Coccus viridis</em>',c:'--sap',m:[2,2,2,2,1,0,0,0,0,0,0,1],t:'ಒಣ ತಿಂಗಳುಗಳಲ್ಲಿ ಅತಿ ಹೆಚ್ಚು [3]. ಒಡತಿಜೀರುಂಡೆಗಳು, ಪರಾವಲಂಬಿ ಕಣಜಗಳು ಮತ್ತು ತೇವದ ಹವಾಮಾನದಲ್ಲಿ ಬಿಳಿ ಶಿಲೀಂಧ್ರ (ಬೂಷ್ಟು) ಇವುಗಳನ್ನು ಹತೋಟಿಯಲ್ಲಿಡುತ್ತವೆ; ಕೀಟನಾಶಕ ಸಿಂಪಡಣೆ ಮೊದಲು ಈ ಮಿತ್ರರನ್ನೇ ಕೊಲ್ಲುವುದರಿಂದ ಹಾವಳಿ ಹೆಚ್ಚಾಗಿ ಇನ್ನಷ್ಟು ಹೆಚ್ಚುತ್ತದೆ [3].',a:'/pest-outbreak-kannada'},
+{id:'cat',k:'pest',n:'ನೆರಳು ಮರಗಳ ಮೇಲಿನ ಕಂಬಳಿಹುಳುಗಳು',s:'<em>Eupterote</em> sp. ಮತ್ತು ಇತರ ಪತಂಗಗಳು',c:'--cat',m:[0,0,0,0,1,2,1,0,0,0,0,0],t:'ಮೊದಲ ಮಳೆಗಳ ನಂತರ ನೆರಳು ಮರಗಳ ಮೇಲೆ ಕಂಬಳಿಹುಳುಗಳು ತುಂಬಿಕೊಳ್ಳಬಹುದು. ಕಣಜಗಳು, ಒಂಟೆಹುಳುಗಳು, ಇರುವೆಗಳು, ಕಪ್ಪೆಗಳು, ಜೇಡಗಳು ಮತ್ತು ಹಕ್ಕಿಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಸಂಖ್ಯೆಯನ್ನು ಮತ್ತೆ ಹತೋಟಿಗೆ ತರುತ್ತವೆ [4].',a:'/pest-outbreak-kannada'},
+{g:'ಕೆಲಸದಲ್ಲಿರುವ ಮಿತ್ರರು'},
+{id:'frogs',k:'ally',n:'ಕಪ್ಪೆಗಳ ಸಂತಾನ ಕಾಲ',s:'<em>Rhacophorus</em>, <em>Raorchestes</em> ಮತ್ತು ಇತರ ಕಪ್ಪೆಗಳು',c:'--ally',m:[0,0,0,0,1,2,2,2,1,0,0,0],t:'ಮುಂಗಾರಿನುದ್ದಕ್ಕೂ ಕಪ್ಪೆಗಳು ಕೂಗುತ್ತ ಮೊಟ್ಟೆ ಇಡುತ್ತವೆ, ಮತ್ತು ರಾತ್ರಿ ಜೀರುಂಡೆಗಳು, ಕಂಬಳಿಹುಳುಗಳು ಮತ್ತು ಇರುವೆಗಳನ್ನು ಬೇಟೆಯಾಡುತ್ತವೆ [4].',a:'/who-eats-whom-kannada'},
+{id:'coral',k:'ally',n:'ಹೂಬಿಟ್ಟ ಹಾರುವಾಣ',s:'<em>Erythrina variegata</em>',c:'--ally',m:[2,2,1,0,0,0,0,0,0,0,0,1],t:'ಒಣ ಕಾಲದ ಮಕರಂದದ ತಾಣ; ಪಿಕಳಾರಗಳು, ಕಾಜಾಣಗಳು ಮತ್ತು ಇತರ ಕೀಟ ತಿನ್ನುವ ಹಕ್ಕಿಗಳನ್ನು ತೋಟದಲ್ಲೇ ಉಳಿಸಿಕೊಳ್ಳುತ್ತದೆ [4].',a:'/who-eats-whom-kannada'},
+{id:'ants',k:'ally',n:'ಬೇಟೆಯಾಡುವ ಇರುವೆಗಳು',s:'ಕೆಂಜಿಗ (<em>Oecophylla smaragdina</em>) ಮತ್ತು ಇತರ ಇರುವೆಗಳು',c:'--ally',m:[1,1,1,1,1,1,1,1,1,1,1,1],t:'ವರ್ಷವಿಡೀ ಚುರುಕು. ಹೊರಗೆ ಓಡಾಡುವ ಕಾಯಿ ಕೊರಕಗಳನ್ನು ಹಿಡಿಯುತ್ತವೆ, ಕಂಬಳಿಹುಳುಗಳ ಮೇಲೆ ದಾಳಿ ಮಾಡುತ್ತವೆ [4].',a:'/who-eats-whom-kannada'}
+];
+var LINK={'/pest-outbreak-kannada':'ಕೀಟಗಳ ಹಾವಳಿ ಪುಟದಲ್ಲಿ ನೋಡಿ','/who-eats-whom-kannada':'ಆಹಾರ ಜಾಲದಲ್ಲಿ ನೋಡಿ'};
+var sel=new Date().getMonth(), first=true;
+var tab=document.getElementById('egpc-tab'), mon=document.getElementById('egpc-mon'), sc=document.getElementById('egpc-scroll');
+function draw(){
+ var h='<thead><tr><th scope="col"></th>'+M.map(function(m,i){return '<th scope="col"><button type="button" data-m="'+i+'" aria-pressed="'+(i===sel)+'" aria-label="'+MF[i]+'">'+m+'</button></th>'}).join('')+'</tr></thead><tbody>';
+ ROWS.forEach(function(R){
+  if(R.g){h+='<tr class="grp"><th scope="rowgroup">'+R.g+'</th><td colspan="12" class="gap"></td></tr>';return}
+  h+='<tr><th scope="row">'+R.n+(R.s?'<small>'+R.s+'</small>':'')+'</th>'+R.m.map(function(v,i){return '<td data-m="'+i+'" style="--c:var('+R.c+')" class="'+(v===2?'on':v===1?'soft':'')+(i===sel?' sel':'')+'" title="'+R.n+', '+MF[i]+(v===2?': ಗರಿಷ್ಠ':v===1?': ಕಡಿಮೆ ಚಟುವಟಿಕೆ':'')+'"></td>'}).join('')+'</tr>'});
+ tab.innerHTML=h+'</tbody>';
+ Array.prototype.forEach.call(tab.querySelectorAll('[data-m]'),function(b){b.onclick=function(){sel=+b.getAttribute('data-m');draw()}});
+ var act=ROWS.filter(function(R){return !R.g&&R.m[sel]>0});
+ function li(R){return '<li style="--c:var('+R.c+')"><i></i><div><strong>'+R.n+(R.m[sel]===2?' (ಗರಿಷ್ಠ)':'')+'.</strong> '+R.t+(R.a?' <a href="'+R.a+'">'+LINK[R.a]+'</a>':'')+'</div></li>'}
+ function grp(k){return act.filter(function(R){return R.k===k})}
+ var p=grp('pest'),a=grp('ally'),c=grp('crop');
+ mon.innerHTML='<h2>'+MF[sel]+'</h2>'+(c.length?'<ul>'+c.map(li).join('')+'</ul>':'')+
+  '<div class="lab">ಗಮನಿಸಿ</div>'+(p.length?'<ul>'+p.map(li).join('')+'</ul>':'<p>ಈ ತಿಂಗಳು ಯಾವ ಮುಖ್ಯ ಪೀಡೆಯೂ ಗರಿಷ್ಠ ಮಟ್ಟದಲ್ಲಿಲ್ಲ.</p>')+
+  (a.length?'<div class="lab">ಕೆಲಸದಲ್ಲಿರುವ ಮಿತ್ರರು</div><ul>'+a.map(li).join('')+'</ul>':'')+
+  '<div class="nav"><button type="button" data-d="-1">← '+MF[(sel+11)%12]+'</button><button type="button" data-d="1">'+MF[(sel+1)%12]+' →</button></div>';
+ Array.prototype.forEach.call(mon.querySelectorAll('[data-d]'),function(b){b.onclick=function(){sel=(sel+12+(+b.getAttribute('data-d')))%12;draw()}});
+ var cell=tab.querySelector('thead [data-m="'+sel+'"]');
+ if(sc&&cell&&sc.scrollWidth>sc.clientWidth){var lab=tab.querySelector('tbody th:not([colspan])');var x=cell.parentNode.offsetLeft-(lab?lab.offsetWidth:0)-cell.offsetWidth*2;sc.scrollLeft=Math.max(0,x)}
+ first=false}
+draw();
+})();
+</script>
