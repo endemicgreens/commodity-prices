@@ -1,0 +1,46 @@
+<!-- Spot the insect game (Masters of Disguise), 2 Nov 2026; markup is in the page code block -->
+<script>
+document.addEventListener("DOMContentLoaded",function(){if(!document.getElementById("egsp"))return;
+(function(){
+var B='https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/';
+var R=[
+{src:B+'cfbf5fd5-7699-4042-b1c0-8a0e0e5bd58b/EGPL_Leaf_Mimic_Katydid_3.jpg',alt:'Leaves on a sapling, one of which is a katydid',
+ q:'One of these leaves is an insect. Which one?',
+ poly:[[.232,.498],[.318,.45],[.473,.45],[.636,.505],[.755,.628],[.832,.846],[.709,.798],[.545,.716],[.409,.641],[.327,.573],[.273,.607],[.236,.6]],head:[0,0,0,0],
+ ans:'The darker green leaf in the middle is a leaf-mimic katydid (Tettigoniidae). Its wings copy a leaf down to the midrib and veins, and you can just see its thin legs and antennae on the left.',
+ cap:'Leaf-mimic katydid · © Endemic Greens'},
+{src:B+'977b4637-4e01-44be-b241-ff1ec85a6d90/EGPL_Leaf_Insect_Probable.jpg',alt:'Leaves at night, one of which is a leaf-shaped insect',
+ q:'One of these leaves is an insect. Where is it?',
+ poly:[[.223,.826],[.281,.797],[.344,.694],[.413,.563],[.456,.492],[.5,.492],[.556,.469],[.625,.478],[.581,.398],[.531,.323],[.5,.319],[.463,.385],[.4,.45],[.319,.544],[.25,.685]],head:[.36,.05,.56,.33],
+ ans:'A leaf insect (Phylliidae). Its flat body is veined like a leaf, and it even sways like one in the breeze.',
+ cap:'Probable leaf insect · © Endemic Greens'},
+{src:B+'647a0604-886b-453a-9c11-ddc8dc2c1b17/EGPL_Leaf_Mimic_Katydid.jpg',alt:'A mossy branch with what looks like a single green leaf hanging below it',
+ q:'There is an insect hiding on this branch. Where?',
+ poly:[[.2,.69],[.3,.62],[.41,.545],[.525,.5],[.575,.45],[.625,.44],[.62,.355],[.55,.28],[.49,.27],[.375,.375],[.37,.43],[.31,.45],[.25,.525]],head:[0,0,0,0],
+ ans:'The “leaf” is the wing of a leaf-mimic katydid (Tettigoniidae) hanging under the branch. By day it stays still, hidden from birds, frogs, lizards and mantises.',
+ cap:'Leaf-mimic katydid · © Endemic Greens'}
+];
+var $=function(i){return document.getElementById(i)};
+var r=0,tries=0,found=0,done=false;
+function inPoly(x,y,p){var c=false;for(var i=0,j=p.length-1;i<p.length;j=i++){var xi=p[i][0],yi=p[i][1],xj=p[j][0],yj=p[j][1];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)c=!c}return c}
+function near(x,y,p,d){return p.some(function(q){return Math.hypot(q[0]-x,(q[1]-y)*.66)<d})}
+function score(){$('egsp-score').textContent='Photo '+(r+1)+' of '+R.length+' · found '+found}
+function load(){var o=R[r];done=false;tries=0;var im=$('egsp-img');im.src=o.src+'?format=1500w';im.srcset=o.src+'?format=750w 750w, '+o.src+'?format=1500w 1500w';im.sizes='(max-width:1000px) 100vw, 1000px';im.alt=o.alt;
+ $('egsp-q').textContent=o.q;$('egsp-cap').textContent=o.cap;var fb=$('egsp-fb');fb.className='fb';fb.textContent='Tap the photo where you think the insect is.';$('egsp-svg').innerHTML='';
+ Array.prototype.forEach.call(document.querySelectorAll('#egsp .mark'),function(m){m.remove()});score();
+ $('egsp-next').textContent=r===R.length-1?'Play again':'Next photo'}
+function reveal(){var o=R[r];$('egsp-svg').innerHTML='<polygon points="'+o.poly.map(function(p){return p.join(',')}).join(' ')+'" fill="rgba(124,196,149,.2)" stroke="#7cc495" stroke-width=".006"/>'}
+function mark(x,y,hit){var m=document.createElement('span');m.className='mark'+(hit?' hit':'');m.style.left=(x*100)+'%';m.style.top=(y*100)+'%';$('egsp-stage').appendChild(m)}
+$('egsp-stage').addEventListener('click',function(e){if(done)return;var b=$('egsp-img').getBoundingClientRect();var x=(e.clientX-b.left)/b.width,y=(e.clientY-b.top)/b.height;var o=R[r],h=o.head;
+ var hit=inPoly(x,y,o.poly)||near(x,y,o.poly,.035)||(x>h[0]&&x<h[2]&&y>h[1]&&y<h[3]);tries++;mark(x,y,hit);var fb=$('egsp-fb');
+ if(hit){done=true;found++;reveal();fb.className='fb';fb.innerHTML='<b>Found it'+(tries===1?' first time':'')+'!</b> '+o.ans}
+ else if(tries<3){fb.className='fb miss';fb.innerHTML='<b>Not there.</b> '+(tries===1?'Look for a leaf that sits a little wrong.':'Try once more, or press Show me.')}
+ else{done=true;reveal();fb.className='fb miss';fb.innerHTML='<b>Well hidden!</b> '+o.ans}
+ score()});
+$('egsp-stage').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();$('egsp-show').click()}});
+$('egsp-show').onclick=function(){if(done)return;done=true;reveal();var fb=$('egsp-fb');fb.className='fb miss';fb.innerHTML='<b>Here it is.</b> '+R[r].ans};
+$('egsp-next').onclick=function(){r=(r+1)%R.length;if(r===0)found=0;load()};
+load();
+})();
+});
+</script>
