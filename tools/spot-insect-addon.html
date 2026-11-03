@@ -7,7 +7,7 @@
 .egsp .q{font-weight:600;font-size:17px;color:#F3EFE4}
 .egsp .score{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 .egsp .stage{position:relative;border-radius:8px;overflow:hidden;cursor:crosshair;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;line-height:0}
-.egsp .stage img{display:block;width:100%;height:auto}
+.egsp .stage img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
 .egsp .stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .egsp .mark{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:3px solid var(--accent);pointer-events:none}
 .egsp .mark.hit{border-color:var(--ok)}
@@ -24,13 +24,13 @@
 @media (max-width:767px){.egsp{padding:14px}.egsp h2{font-size:23px}}
 </style>
 <h2 id="egsp-h">Spot the insect</h2>
-<div class="bar"><p class="q" id="egsp-q"></p><span class="score" id="egsp-score"></span></div>
+<div class="bar"><p class="q" id="egsp-q">One of these leaves is an insect. Which one?</p><span class="score" id="egsp-score">Photo 1 of 3 · found 0</span></div>
 <div class="stage" id="egsp-stage" role="button" tabindex="0" aria-label="Photo: tap where you think the insect is. Press Enter to reveal it.">
-<img id="egsp-img" alt="">
+<img id="egsp-img" src="https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/cfbf5fd5-7699-4042-b1c0-8a0e0e5bd58b/EGPL_Leaf_Mimic_Katydid_3.jpg?format=1500w" width="1500" height="1000" alt="Leaves on a sapling, one of which is a katydid">
 <svg id="egsp-svg" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg>
 </div>
 <p class="fb" id="egsp-fb" aria-live="polite">Tap the photo where you think the insect is.</p>
-<div class="bar"><span class="cap" id="egsp-cap"></span><span class="btns"><button type="button" id="egsp-show">Show me</button><button type="button" class="primary" id="egsp-next">Next photo</button></span></div>
+<div class="bar"><span class="cap" id="egsp-cap">Leaf-mimic katydid · © Endemic Greens</span><span class="btns"><button type="button" id="egsp-show">Show me</button><button type="button" class="primary" id="egsp-next">Next photo</button></span></div>
 <script>
 (function(){
 var B='https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/';
