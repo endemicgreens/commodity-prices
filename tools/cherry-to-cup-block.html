@@ -5,11 +5,14 @@
 .egct a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .egct .ttl{margin:0 0 14px;font:400 clamp(38px,4.75vw,66px)/0.97 Roboto,sans-serif;color:var(--fg);letter-spacing:-.01em}
 .egct .kick{font-size:20px;color:#F3EFE4;margin:0 0 18px;max-width:58ch}
+.egct .hero{margin:0 0 22px;max-width:900px}
+.egct .hero img{display:block;width:100%;height:auto;border-radius:12px}
+.egct .hero figcaption{font-size:13.5px;color:var(--muted);margin-top:8px}
 .egct .lead{max-width:66ch;margin:0 0 30px}
 .egct h2{margin:0 0 10px;font-size:clamp(24px,2.6vw,30px);line-height:1.2;color:var(--accent);font-weight:500}
 .egct section{margin:0 0 40px;max-width:900px}
 .egct section>p{max-width:68ch;margin:0 0 12px}
-.egct .ph{border:1.5px dashed var(--line);border-radius:10px;background:var(--card);color:var(--muted);font-size:13.5px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;aspect-ratio:4/3;width:100%}
+.egct .ph-unused{border:1.5px dashed var(--line);border-radius:10px;background:var(--card);color:var(--muted);font-size:13.5px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;aspect-ratio:4/3;width:100%}
 .egct .steps{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .egct .steps li{display:flex;flex-direction:column;gap:10px;min-width:0}
 .egct .steps .n{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -40,18 +43,19 @@
 <div class="egct" id="egct" lang="en">
 <h1 class="ttl">From Cherry to Cup</h1>
 <p class="kick">Every cup of coffee starts as a red fruit on a forest shrub. How that shrub is grown decides what your cup costs the forest, and how it tastes.</p>
+<figure class="hero"><img src="https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/8746590b-1ebe-47fa-b410-35cbda7a8603/EGPL_Ripe_Coffee_Cherries.jpg?format=1500w" srcset="https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/8746590b-1ebe-47fa-b410-35cbda7a8603/EGPL_Ripe_Coffee_Cherries.jpg?format=750w 750w, https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/8746590b-1ebe-47fa-b410-35cbda7a8603/EGPL_Ripe_Coffee_Cherries.jpg?format=1500w 1500w, https://images.squarespace-cdn.com/content/67469cd20b2bb9492dfb7801/8746590b-1ebe-47fa-b410-35cbda7a8603/EGPL_Ripe_Coffee_Cherries.jpg?format=2500w 2500w" sizes="(max-width: 900px) 100vw, 900px" width="2500" height="1800" alt="Clusters of ripe red coffee cherries, with a few still green, on coffee branches under shade at Endemic Greens"><figcaption>Ripe coffee cherries on our plantation, ready for picking</figcaption></figure>
 <p class="lead">Coffee is a forest plant. Wild arabica still grows in the shade of the mountain forests of Ethiopia [1], and in India most coffee is grown under a canopy of trees [2]. Here is how a coffee berry becomes your morning cup, and why it matters whether it grew under living forest or in open sun.</p>
 
 <section aria-labelledby="ct-j">
 <h2 id="ct-j">The journey of a coffee bean</h2>
 <p>Each step below happens on a coffee plantation in the Western Ghats, through one year.</p>
 <ol class="steps">
-<li><div class="ph">Photo to come: white coffee blossom</div><span class="n"><b>1</b> · February to April</span><h3>Blossom showers</h3><p>The first good rains after the dry months bring the bushes into flower all at once. For two or three days the plantation smells of jasmine, and bees work the blossom.</p></li>
-<li><div class="ph">Photo to come: green berries on the branch</div><span class="n"><b>2</b> · April to October</span><h3>Green berries</h3><p>Each pollinated flower becomes a berry that grows slowly through the monsoon. Under shade it ripens more slowly, which gives the bean time to develop its flavour [5].</p></li>
-<li><div class="ph">Photo to come: ripe red cherries</div><span class="n"><b>3</b> · November to February</span><h3>Ripe cherries</h3><p>The berries turn red and sweet. Coffee growers call them cherries. Inside each are usually two seeds, the coffee beans.</p></li>
-<li><div class="ph">Photo to come: hand picking</div><span class="n"><b>4</b> · Harvest</span><h3>Picking by hand</h3><p>Pickers go over the bushes several times, taking the ripe cherries. Fallen and leftover berries are gathered too, so that pests have nowhere to wait for next year.</p></li>
-<li><div class="ph">Photo to come: cherries drying in the sun</div><span class="n"><b>5</b> · After picking</span><h3>Pulping and drying</h3><p>Some cherries are pulped and washed, leaving the bean in a papery skin (parchment coffee). Others are dried whole in the sun (cherry coffee). Either way, drying takes one to three weeks of turning and raking.</p></li>
-<li><div class="ph">Photo to come: green beans, then roasted</div><span class="n"><b>6</b> · Curing and roasting</span><h3>Green beans to roast</h3><p>At the curing works the dry husk is removed and the green beans are sorted by size. Roasting, usually far from the plantation, turns them brown and brings out the aroma you know.</p></li>
+<li><span class="n"><b>1</b> · February to April</span><h3>Blossom showers</h3><p>The first good rains after the dry months bring the bushes into flower all at once. For two or three days the plantation smells of jasmine, and bees work the blossom.</p></li>
+<li><span class="n"><b>2</b> · April to October</span><h3>Green berries</h3><p>Each pollinated flower becomes a berry that grows slowly through the monsoon. Under shade it ripens more slowly, which gives the bean time to develop its flavour [5].</p></li>
+<li><span class="n"><b>3</b> · November to February</span><h3>Ripe cherries</h3><p>The berries turn red and sweet. Coffee growers call them cherries. Inside each are usually two seeds, the coffee beans.</p></li>
+<li><span class="n"><b>4</b> · Harvest</span><h3>Picking by hand</h3><p>Pickers go over the bushes several times, taking the ripe cherries. Fallen and leftover berries are gathered too, so that pests have nowhere to wait for next year.</p></li>
+<li><span class="n"><b>5</b> · After picking</span><h3>Pulping and drying</h3><p>Some cherries are pulped and washed, leaving the bean in a papery skin (parchment coffee). Others are dried whole in the sun (cherry coffee). Either way, drying takes one to three weeks of turning and raking.</p></li>
+<li><span class="n"><b>6</b> · Curing and roasting</span><h3>Green beans to roast</h3><p>At the curing works the dry husk is removed and the green beans are sorted by size. Roasting, usually far from the plantation, turns them brown and brings out the aroma you know.</p></li>
 </ol>
 </section>
 
