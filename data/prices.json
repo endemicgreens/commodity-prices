@@ -4,9 +4,9 @@
    "source": "Coffee Board of India, Daily Coffee Market Report",
    "url": "https://coffeeboard.gov.in/Market_Info.aspx",
    "data": {
-    "report_date": "2026-11-03",
+    "report_date": "2026-11-04",
     "raw_karnataka": {
-     "as_on": "2026-11-02",
+     "as_on": "2026-11-03",
      "unit": "Rs per 50 kg",
      "prices": {
       "arabica_parchment": {
@@ -28,86 +28,86 @@
      }
     },
     "futures": {
-     "as_on": "2026-11-02",
+     "as_on": "2026-11-03",
      "arabica_new_york": [
       {
        "month": "Dec-2026",
-       "us_cents_lb": 292.1,
-       "inr_kg": 609.84
+       "us_cents_lb": 283.95,
+       "inr_kg": 592.32
       },
       {
        "month": "Mar-2027",
-       "us_cents_lb": 280.55,
-       "inr_kg": 585.73
+       "us_cents_lb": 274.6,
+       "inr_kg": 572.82
       },
       {
        "month": "May-2027",
-       "us_cents_lb": 276.5,
-       "inr_kg": 577.27
+       "us_cents_lb": 270.95,
+       "inr_kg": 565.2
       }
      ],
      "robusta_europe": [
       {
        "month": "Nov-2026",
-       "usd_tonne": 3256.0,
-       "us_cents_lb": 147.69,
-       "inr_kg": 308.34
+       "usd_tonne": 3225.0,
+       "us_cents_lb": 146.28,
+       "inr_kg": 305.15
       },
       {
        "month": "Jan-2027",
-       "usd_tonne": 3241.0,
-       "us_cents_lb": 147.01,
-       "inr_kg": 306.92
+       "usd_tonne": 3210.0,
+       "us_cents_lb": 145.6,
+       "inr_kg": 303.73
       },
       {
        "month": "Mar-2027",
-       "usd_tonne": 3227.0,
-       "us_cents_lb": 146.37,
-       "inr_kg": 305.6
+       "usd_tonne": 3190.0,
+       "us_cents_lb": 144.7,
+       "inr_kg": 301.84
       }
      ]
     },
-    "inr_per_usd": 94.7
+    "inr_per_usd": 94.62
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-04T09:57+05:30",
-   "last_checked": "2026-11-04T09:57+05:30"
+   "last_success": "2026-11-04T19:12+05:30",
+   "last_checked": "2026-11-04T19:12+05:30"
   },
   "cardamom": {
    "source": "Spices Board of India, daily e-auction prices of small cardamom",
    "url": "https://www.indianspices.com/marketing/price/domestic/daily-price.html",
    "data": {
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "unit": "Rs per kg",
     "auctions": [
      {
-      "date": "2026-11-03",
-      "auctioneer": "Mas Enterprises, Vandanmettu",
-      "lots": 242.0,
-      "arrived_kg": 86290.9,
-      "sold_kg": 86070.0,
-      "max": 4001.0,
-      "min": 2577.0,
-      "avg": 3080.63
+      "date": "2026-11-04",
+      "auctioneer": "South Indian Green Cardamom Company Ltd, Kochi",
+      "lots": 208.0,
+      "arrived_kg": 58368.4,
+      "sold_kg": 55928.0,
+      "max": 3558.0,
+      "min": 2435.0,
+      "avg": 3025.34
      },
      {
-      "date": "2026-11-03",
-      "auctioneer": "Header Systems (India) Limited, Nedumkandam",
-      "lots": 228.0,
-      "arrived_kg": 70135.6,
-      "sold_kg": 67609.3,
-      "max": 3446.0,
-      "min": 2538.0,
-      "avg": 3035.78
+      "date": "2026-11-04",
+      "auctioneer": "Cardamom Planters' Association, Santhanpara",
+      "lots": 96.0,
+      "arrived_kg": 24760.8,
+      "sold_kg": 19231.9,
+      "max": 3394.0,
+      "min": 2730.0,
+      "avg": 2943.15
      }
     ],
-    "weighted_average": 3060.9
+    "weighted_average": 3004.31
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-04T09:57+05:30",
-   "last_checked": "2026-11-04T09:57+05:30"
+   "last_success": "2026-11-04T19:12+05:30",
+   "last_checked": "2026-11-04T19:12+05:30"
   },
   "pepper": {
    "source": "Spices Board of India, current market price of key spices",
@@ -141,9 +141,9 @@
    "status": "stale",
    "error": "SourceError: No pepper rows found",
    "last_success": "2026-11-03T09:54+05:30",
-   "last_checked": "2026-11-04T09:57+05:30"
+   "last_checked": "2026-11-04T19:12+05:30"
   }
  },
- "generated": "2026-11-04T09:57+05:30",
+ "generated": "2026-11-04T19:12+05:30",
  "note": "Figures are copied from the official sources named in each section, with their dates. Endemic Greens does not adjust, average (except the sold-quantity-weighted cardamom figure) or forecast them."
 }
