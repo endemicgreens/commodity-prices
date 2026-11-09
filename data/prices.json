@@ -4,9 +4,9 @@
    "source": "Coffee Board of India, Daily Coffee Market Report",
    "url": "https://coffeeboard.gov.in/Market_Info.aspx",
    "data": {
-    "report_date": "2026-11-06",
+    "report_date": "2026-11-09",
     "raw_karnataka": {
-     "as_on": "2026-11-05",
+     "as_on": "2026-11-06",
      "unit": "Rs per 50 kg",
      "prices": {
       "arabica_parchment": {
@@ -28,122 +28,112 @@
      }
     },
     "futures": {
-     "as_on": "2026-11-05",
+     "as_on": "2026-11-06",
      "arabica_new_york": [
       {
        "month": "Dec-2026",
-       "us_cents_lb": 277.15,
-       "inr_kg": 577.04
+       "us_cents_lb": 280.0,
+       "inr_kg": 578.96
       },
       {
        "month": "Mar-2027",
-       "us_cents_lb": 269.25,
-       "inr_kg": 560.59
+       "us_cents_lb": 271.65,
+       "inr_kg": 561.69
       },
       {
        "month": "May-2027",
-       "us_cents_lb": 265.65,
-       "inr_kg": 553.09
+       "us_cents_lb": 267.7,
+       "inr_kg": 553.53
       }
      ],
      "robusta_europe": [
       {
        "month": "Nov-2026",
-       "usd_tonne": 3256.0,
-       "us_cents_lb": 147.69,
-       "inr_kg": 307.5
+       "usd_tonne": 3285.0,
+       "us_cents_lb": 149.01,
+       "inr_kg": 308.1
       },
       {
        "month": "Jan-2027",
-       "usd_tonne": 3241.0,
-       "us_cents_lb": 147.01,
-       "inr_kg": 306.08
+       "usd_tonne": 3270.0,
+       "us_cents_lb": 148.32,
+       "inr_kg": 306.69
       },
       {
        "month": "Mar-2027",
-       "usd_tonne": 3219.0,
-       "us_cents_lb": 146.01,
-       "inr_kg": 304.0
+       "usd_tonne": 3243.0,
+       "us_cents_lb": 147.1,
+       "inr_kg": 304.16
       }
      ]
     },
-    "inr_per_usd": 94.44
+    "inr_per_usd": 93.79
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-09T10:04+05:30",
-   "last_checked": "2026-11-09T10:04+05:30"
+   "last_success": "2026-11-09T19:15+05:30",
+   "last_checked": "2026-11-09T19:15+05:30"
   },
   "cardamom": {
    "source": "Spices Board of India, daily e-auction prices of small cardamom",
    "url": "https://www.indianspices.com/marketing/price/domestic/daily-price.html",
    "data": {
-    "date": "2026-11-07",
+    "date": "2026-11-09",
     "unit": "Rs per kg",
     "auctions": [
      {
-      "date": "2026-11-07",
-      "auctioneer": "Speciality Indian Food Parks Exports Private Limited",
-      "lots": 171.0,
-      "arrived_kg": 57247.9,
-      "sold_kg": 56755.2,
+      "date": "2026-11-09",
+      "auctioneer": "Sugandhagiri Spices Promoters&Traders Pvt Ltd",
+      "lots": 241.0,
+      "arrived_kg": 79824.6,
+      "sold_kg": 79526.1,
       "max": 4003.0,
-      "min": 2616.0,
-      "avg": 3197.76
-     },
-     {
-      "date": "2026-11-07",
-      "auctioneer": "Cardamom Growersforever Private Limited",
-      "lots": 132.0,
-      "arrived_kg": 25347.9,
-      "sold_kg": 25050.9,
-      "max": 3608.0,
-      "min": 2605.0,
-      "avg": 3071.93
+      "min": 2374.0,
+      "avg": 3210.73
      }
     ],
-    "weighted_average": 3159.23
+    "weighted_average": 3210.73
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-09T10:04+05:30",
-   "last_checked": "2026-11-09T10:04+05:30"
+   "last_success": "2026-11-09T19:15+05:30",
+   "last_checked": "2026-11-09T19:15+05:30"
   },
   "pepper": {
    "source": "Spices Board of India, current market price of key spices",
    "url": "https://www.indianspices.com/marketing/price/domestic/current-market-price.html",
    "data": {
-    "date": "2026-11-06",
+    "date": "2026-11-09",
     "unit": "Rs per kg",
     "markets": [
      {
-      "date": "2026-11-06",
+      "date": "2026-11-09",
       "market": "Cochin",
       "state": "Kerala",
       "grade": "Garbled",
       "source": "IPSTA",
       "min": null,
       "max": null,
-      "avg": 758.0
+      "avg": 762.0
      },
      {
-      "date": "2026-11-06",
+      "date": "2026-11-09",
       "market": "Cochin",
       "state": "Kerala",
       "grade": "Ungarbled",
       "source": "IPSTA",
       "min": null,
       "max": null,
-      "avg": 738.0
+      "avg": 742.0
      }
     ]
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-09T10:04+05:30",
-   "last_checked": "2026-11-09T10:04+05:30"
+   "last_success": "2026-11-09T19:15+05:30",
+   "last_checked": "2026-11-09T19:15+05:30"
   }
  },
- "generated": "2026-11-09T10:04+05:30",
+ "generated": "2026-11-09T19:15+05:30",
  "note": "Figures are copied from the official sources named in each section, with their dates. Endemic Greens does not adjust, average (except the sold-quantity-weighted cardamom figure) or forecast them."
 }
