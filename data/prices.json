@@ -69,45 +69,45 @@
     },
     "inr_per_usd": 93.77
    },
-   "status": "ok",
-   "error": null,
+   "status": "stale",
+   "error": "URLError: <urlopen error timed out>",
    "last_success": "2026-11-11T19:15+05:30",
-   "last_checked": "2026-11-11T19:15+05:30"
+   "last_checked": "2026-11-12T09:58+05:30"
   },
   "cardamom": {
    "source": "Spices Board of India, daily e-auction prices of small cardamom",
    "url": "https://www.indianspices.com/marketing/price/domestic/daily-price.html",
    "data": {
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "unit": "Rs per kg",
     "auctions": [
      {
-      "date": "2026-11-10",
-      "auctioneer": "Climate Natural Spices Private Limited",
-      "lots": 173.0,
-      "arrived_kg": 36219.8,
-      "sold_kg": 35937.4,
-      "max": 3764.0,
-      "min": 2451.0,
-      "avg": 3156.74
+      "date": "2026-11-11",
+      "auctioneer": "Idukki Dist.Traditional Cardamom Producer Company Ltd",
+      "lots": 230.0,
+      "arrived_kg": 60632.3,
+      "sold_kg": 59421.9,
+      "max": 3538.0,
+      "min": 2002.0,
+      "avg": 3085.87
      },
      {
-      "date": "2026-11-10",
-      "auctioneer": "The Cardamom Planters Marketing Co-Operative Society Limited",
-      "lots": 245.0,
-      "arrived_kg": 85899.5,
-      "sold_kg": 82929.9,
-      "max": 3703.0,
-      "min": 2502.0,
-      "avg": 3133.09
+      "date": "2026-11-11",
+      "auctioneer": "Spice More Trading Company, Kumily",
+      "lots": 292.0,
+      "arrived_kg": 125080.7,
+      "sold_kg": 125080.7,
+      "max": 3557.0,
+      "min": 2467.0,
+      "avg": 3090.39
      }
     ],
-    "weighted_average": 3140.24
+    "weighted_average": 3088.93
    },
-   "status": "stale",
-   "error": "URLError: <urlopen error timed out>",
-   "last_success": "2026-11-11T09:58+05:30",
-   "last_checked": "2026-11-11T19:15+05:30"
+   "status": "ok",
+   "error": null,
+   "last_success": "2026-11-12T09:58+05:30",
+   "last_checked": "2026-11-12T09:58+05:30"
   },
   "pepper": {
    "source": "Spices Board of India, current market price of key spices",
@@ -140,10 +140,10 @@
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-11T19:15+05:30",
-   "last_checked": "2026-11-11T19:15+05:30"
+   "last_success": "2026-11-12T09:58+05:30",
+   "last_checked": "2026-11-12T09:58+05:30"
   }
  },
- "generated": "2026-11-11T19:15+05:30",
+ "generated": "2026-11-12T09:58+05:30",
  "note": "Figures are copied from the official sources named in each section, with their dates. Endemic Greens does not adjust, average (except the sold-quantity-weighted cardamom figure) or forecast them."
 }
