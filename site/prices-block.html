@@ -45,6 +45,18 @@
 .egmp .fine{margin-top:26px;font-size:14px;color:var(--muted);max-width:80ch}
 .egmp .fine p{margin:0 0 8px}
 .egmp .err{padding:14px;border:1px solid var(--line);border-radius:10px}
+.egmp button.pill{font-family:inherit;line-height:inherit;margin:0}
+.egmp button.pill[disabled]{opacity:.55;cursor:default}
+.egmp .pests{margin:0 0 18px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:15px;line-height:1.5}
+.egmp .pests h2{margin:0 0 4px;font:600 17px/1.35 Roboto,system-ui,sans-serif;color:var(--accent);letter-spacing:0}
+.egmp .pests ul{margin:0 0 4px;padding-left:20px}
+.egmp .pests li{margin:2px 0}
+.egmp .pests .pk{display:inline-block;margin-left:6px;padding:0 8px;border-radius:999px;border:1px solid var(--accent);font-size:12.5px;color:#F3EFE4;white-space:nowrap}
+.egmp .visit{margin:0 0 16px;font-size:15px;line-height:1.55}
+.egmp .visit .chg{font-size:inherit}
+.egmp .ya{font-size:13px;line-height:1.4;color:var(--muted)}
+.egmp tr.hy td{border-bottom:0;padding-bottom:1px}
+.egmp tr.ya td{padding-top:0}
 @media (max-width:1000px){.egmp .two{grid-template-columns:1fr;gap:14px}}
 @media (max-width:760px){.egmp{font-size:16px}.egmp .grid,.egmp .more{grid-template-columns:1fr}.egmp .card{padding:16px}.egmp svg.spark{width:64px}.egmp table{font-size:14.5px}.egmp .sp{display:none}.egmp .chg{white-space:normal;display:inline-block;line-height:1.3}.egmp td.n{white-space:normal}.egmp .big{white-space:nowrap}.egmp .big{font-size:17px}.egmp th,.egmp td{padding:6px 3px}}
 </style>
@@ -53,7 +65,9 @@
 <p class="kick">Today’s prices consolidated: Karnataka coffee, black pepper and small cardamom</p>
 <div class="disc" role="note"><strong>Disclaimer: for convenience only, not a price quote.</strong> Endemic Greens does not buy or sell at these prices, and does not set, check or guarantee them. They are copied automatically, unchanged, from three official sources: the <a href="https://coffeeboard.gov.in/Market_Info.aspx" target="_blank" rel="noopener">Coffee Board of India, Daily Coffee Market Report</a> (coffee and world futures), the <a href="https://www.indianspices.com/marketing/price/domestic/current-market-price.html" target="_blank" rel="noopener">Spices Board of India, current market prices</a> (black pepper) and the <a href="https://www.indianspices.com/marketing/price/domestic/daily-price.html" target="_blank" rel="noopener">Spices Board of India, daily auction prices</a> (small cardamom). Copying can fail or lag, and a source can publish an error, so always confirm the price with the source and with your buyer or seller before you trade. This page is information only, not an offer, a quote or advice, and Endemic Greens accepts no liability for any loss arising from its use.</div>
 <p class="lead">Karnataka coffee prices, Kochi and Sirsi pepper, and small-cardamom auction prices, copied twice a day from the <strong>Coffee Board of India</strong> and the <strong>Spices Board of India</strong>. Every figure shows its date and source, and nothing is estimated or forecast.</p>
-<div class="bar"><a class="pill wa" id="egmp-wa" href="#" target="_blank" rel="noopener">Share on WhatsApp</a><a class="pill ghost" href="/kaadu-kaapi">Try today’s prices in the Kaadu Kaapi Calculator</a><span class="upd" id="egmp-upd">Loading prices…</span></div>
+<div class="bar"><a class="pill wa" id="egmp-wa" href="#" target="_blank" rel="noopener">Share on WhatsApp</a><button type="button" class="pill ghost" id="egmp-pic" disabled>Share as a picture</button><a class="pill ghost" href="/kaadu-kaapi">Try today’s prices in the Kaadu Kaapi Calculator</a><span class="upd" id="egmp-upd">Loading prices…</span></div>
+<div class="pests" id="egmp-pests" hidden></div>
+<p class="visit" id="egmp-visit" hidden></p>
 <div class="grid" id="egmp-grid"></div>
 <div class="chartbox"><h2>Prices over the past year</h2><div class="ctl" id="egmp-ctl" role="group" aria-label="Choose a price"></div><svg class="chart" id="egmp-chart" viewBox="0 0 900 300" role="img" aria-label="Price chart"></svg><p class="src" id="egmp-chartsrc"></p></div>
 <div class="more">
@@ -88,17 +102,99 @@ function prevRec(series,date,key,days){if(!series)return null;var target=new Dat
 function spark(series,key){var pts=(series||[]).slice(-90).map(function(r){return key(r)}).filter(function(v){return v!=null});if(pts.length<3)return '';var lo=Math.min.apply(null,pts),hi=Math.max.apply(null,pts),w=84,h=26;var sc=function(v){return hi===lo?h/2:h-2-(v-lo)/(hi-lo)*(h-4)};var p=pts.map(function(v,i){return (i/(pts.length-1)*w).toFixed(1)+','+sc(v).toFixed(1)}).join(' ');return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="1.5" points="'+p+'"/></svg>'}
 function staleNote(sec){if(!sec)return '<p class="stale">This source could not be read.</p>';if(sec.status==='ok')return '';return '<p class="stale">Not updated since '+esc(dt(sec.last_success))+': the official page could not be read at the last check ('+esc(dt(sec.last_checked))+'). Showing the last figures read.</p>'}
 
+/* v2 strings (a year ago, last visit, picture, this month's pests). Each is written once, here. {d} = a date, {m} = a month or a market. */
+var T={
+yearAgo:'A year ago: ',
+onYear:'on a year ago',
+visit:'Since your last visit ({d}): ',
+visitNone:'No new prices since your last visit on {d}.',
+visitPepper:'Pepper ({m})',
+visitCard:'Cardamom',
+picCoffee:'Coffee, Karnataka',
+picPer50:'₹ per 50 kg',
+picPepper:'Black pepper',
+picPerKg:'₹ per kg',
+picCard:'Small cardamom',
+picAvg:'Auction average',
+picSrc:'Sources: Coffee Board of India and Spices Board of India',
+picNote:'For convenience only, not a price quote',
+pestTitle:'Pests to watch this month ({m})',
+pestPeak:'peak month',
+pestNone:'The Pest Calendar marks no pest for this month.',
+pestLink:'See the month in the Pest Calendar',
+months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+pests:{wsb:'White stem borer',cbb:'Coffee berry borer',sap:'Mealybugs and green scale',cat:'Caterpillars on shade trees'}
+};
+/* Copied on 12 Nov 2026 from the Coffee Pest Calendar (/pest-calendar), rows with k:'pest': id, Latin name, 12 monthly levels Jan–Dec (0 = not marked, 1 = active, 2 = peak). Update here if the calendar changes. */
+var PESTS=[['wsb','<em>Xylotrechus quadripes</em>',[0,0,0,2,2,0,0,0,1,2,2,2]],['cbb','<em>Hypothenemus hampei</em>',[1,1,1,0,0,0,1,2,2,2,1,0]],['sap','Pseudococcidae, <em>Coccus viridis</em>',[2,2,2,2,1,0,0,0,0,0,0,1]],['cat','<em>Eupterote</em> sp. and others',[0,0,0,0,1,2,1,0,0,0,0,0]]];
+var PIC=null;
+/* the record for the same date a year earlier: the latest one on or before it, at most 10 days before */
+function yearRec(series,date,key){if(!series||!date)return null;var p=date.slice(0,10).split('-'),day=p[1]==='02'&&p[2]==='29'?'28':p[2],hi=(+p[0]-1)+'-'+p[1]+'-'+day,lo=new Date(Date.UTC(+p[0]-1,+p[1]-1,+day-10)).toISOString().slice(0,10);for(var i=series.length-1;i>=0;i--){var r=series[i];if(!r.date||r.date>hi)continue;if(r.date<lo)break;if(key(r)!=null)return r}return null}
+function ya(was,date,now,prev){return T.yearAgo+was+' ('+esc(d(date))+') '+chg(now,prev,T.onYear)}
+function pests(){var el=$('egmp-pests');if(!el)return;var mi=new Date(Date.now()+198e5).getUTCMonth(),li='';/* month in India time (UTC+5:30) */
+  PESTS.forEach(function(p){var lv=p[2][mi];if(lv)li+='<li>'+esc(T.pests[p[0]])+' ('+p[1]+')'+(lv===2?'<span class="pk">'+esc(T.pestPeak)+'</span>':'')+'</li>'});
+  el.innerHTML='<h2>'+esc(T.pestTitle.replace('{m}',T.months[mi]))+'</h2>'+(li?'<ul>'+li+'</ul>':'<p>'+esc(T.pestNone)+'</p>')+'<p><a href="/pest-calendar">'+esc(T.pestLink)+'</a></p>';el.hidden=false}
+/* Since your last visit. Kept only in this browser (localStorage 'egmp-last'): {t: time saved, p: {price: {d: report date, v: value}}, b: the visit before, which is what the line compares with}. */
+function visit(cur,lab){var el=$('egmp-visit'),st=null,now=Date.now(),base=null,k;
+  try{st=JSON.parse(localStorage.getItem('egmp-last'));if(!st||typeof st.t!=='number'||!st.p||typeof st.p!=='object')st=null}catch(e){st=null}
+  var put=function(o){try{localStorage.setItem('egmp-last',JSON.stringify(o))}catch(e){}};
+  if(!st)put({t:now,p:cur});
+  else if(now-st.t>216e5||st.t>now){base={t:st.t,p:st.p};var p={};for(k in st.p)p[k]=st.p[k];for(k in cur)p[k]=cur[k];put({t:now,p:p,b:base})}/* replaced only when older than 6 hours */
+  else if(st.b&&typeof st.b.t==='number'&&st.b.p&&typeof st.b.p==='object')base=st.b;
+  if(!base||!el)return;
+  var x=new Date(base.t),two=function(v){return (v<10?'0':'')+v},when=esc(ds(x.getFullYear()+'-'+two(x.getMonth()+1)+'-'+two(x.getDate()))),out=[];
+  for(k in cur){var o=base.p[k];if(!o||typeof o.d!=='string'||typeof o.v!=='number'||!(o.v>0)||!(cur[k].d>o.d))continue;out.push(esc(lab[k])+' '+chg(cur[k].v,o.v,''))}
+  el.innerHTML=out.length?esc(T.visit.replace('{d}',when))+out.join(' · '):esc(T.visitNone.replace('{d}',when));el.hidden=false}
+/* Share as a picture: a 1080 x 1350 PNG drawn in the page's colours */
+function drawPic(pic,fam){var W=1080,Hh=1350,M=64,c=document.createElement('canvas');c.width=W;c.height=Hh;var x=c.getContext('2d'),FG='#CFDCCF',MU='rgba(207,220,207,.72)',AC='rgb(232,101,60)',inner=W-2*M;
+  var f=function(w,s){x.font=w+' '+s+'px '+fam};
+  var fit=function(t,w,s,max){f(w,s);while(s>12&&x.measureText(t).width>max){s-=1;f(w,s)}return s};
+  var wrap=function(t,max){var ls=[],l='';t.split(' ').forEach(function(q){var z=l?l+' '+q:q;if(l&&x.measureText(z).width>max){ls.push(l);l=q}else l=z});if(l)ls.push(l);return ls};
+  x.fillStyle='#10261b';x.fillRect(0,0,W,Hh);x.fillStyle=AC;x.fillRect(0,0,W,14);x.textBaseline='alphabetic';
+  var ts=66,tl;for(;;){f(400,ts);tl=wrap(pic.title,inner);if(tl.length<=2||ts<=40)break;ts-=2}
+  tl=tl.slice(0,3);var y=M+26;x.fillStyle=FG;tl.forEach(function(l){fit(l,400,ts,inner);y+=Math.round(ts*1.12);x.fillText(l,M,y)});
+  var top=y+34;
+  var fy=Hh-54;x.textAlign='left';
+  fit(pic.url,600,34,inner);x.fillStyle=AC;x.fillText(pic.url,M,fy);
+  fit(T.picNote,600,30,inner);x.fillStyle='#F3EFE4';x.fillText(T.picNote,M,fy-54);
+  fit(T.picSrc,400,25,inner);x.fillStyle=MU;x.fillText(T.picSrc,M,fy-100);
+  var bottom=fy-150,rows=0;pic.secs.forEach(function(s){rows+=s.r.length});
+  var need=pic.secs.length*(58+30)+rows*74,k=Math.min(1,(bottom-top)/need),gap=30*k+Math.min(34,Math.max(0,(bottom-top-need*k)/pic.secs.length));
+  y=top;
+  pic.secs.forEach(function(s){
+    var sub=s.u+(s.d?' · '+s.d:''),hs=34*k,ss=26*k;
+    for(;;){f(600,hs);var hw=x.measureText(s.h).width;f(400,ss);if(hw+24+x.measureText(sub).width<=inner||hs<=14)break;hs-=1;ss-=.75}
+    y+=44*k;f(600,hs);x.fillStyle=AC;x.textAlign='left';x.fillText(s.h,M,y);f(400,ss);x.fillStyle=MU;x.textAlign='right';x.fillText(sub,W-M,y);
+    y+=14*k;x.fillStyle='rgba(207,220,207,.3)';x.fillRect(M,y,inner,2);
+    s.r.forEach(function(r){y+=74*k;fit(r[1],600,44*k,inner*.62);x.fillStyle='#F3EFE4';x.textAlign='right';x.fillText(r[1],W-M,y-22*k);var pw=x.measureText(r[1]).width;
+      fit(r[0],400,36*k,inner-pw-28);x.fillStyle=FG;x.textAlign='left';x.fillText(r[0],M,y-22*k);x.fillStyle='rgba(207,220,207,.18)';x.fillRect(M,y,inner,1)});
+    y+=gap});
+  return c}
+function savePic(blob,name){var u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u)},4000)}
+function picFonts(){var kn=root.lang==='kn',fam=kn?'"Noto Sans Kannada"':'Roboto',txt=PIC?JSON.stringify(PIC)+T.picSrc+T.picNote:'',ok=function(){return fam+(kn?',sans-serif':',system-ui,sans-serif')};
+  if(!document.fonts||!document.fonts.load)return Promise.resolve(ok());
+  var w=Promise.all([document.fonts.load('600 40px '+fam,txt),document.fonts.load('400 40px '+fam,txt)]).catch(function(){});
+  return Promise.race([w,new Promise(function(r){setTimeout(r,6000)})]).then(ok)}
+function sharePic(){var b=$('egmp-pic');if(!PIC||!b||b.disabled)return;b.disabled=true;var done=function(){b.disabled=false};
+  picFonts().then(function(fam){drawPic(PIC,fam).toBlob(function(blob){if(!blob){done();return}
+    var name='endemic-greens-prices-'+PIC.day+'.png',file=null,can=false;
+    try{file=new File([blob],name,{type:'image/png'});can=!!(navigator.canShare&&navigator.canShare({files:[file]}))}catch(e){can=false}
+    if(can)navigator.share({files:[file],text:PIC.text}).then(done,function(e){if(!e||e.name!=='AbortError')savePic(blob,name);done()});
+    else{savePic(blob,name);done()}},'image/png')}).catch(done)}
+
 var COFFEE=[['arabica_parchment','Arabica parchment'],['arabica_cherry','Arabica cherry'],['robusta_parchment','Robusta parchment'],['robusta_cherry','Robusta cherry']];
 
 function render(P,H){
-  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*Coffee, pepper and cardamom prices* (for convenience only, not a price quote)'];
+  var S=P.sections||{},g=$('egmp-grid'),html='',share=['*Coffee, pepper and cardamom prices* (for convenience only, not a price quote)'],cur={},lab={},pic=[];
   // coffee
   var C=S.coffee,cd=C&&C.data;
   html+='<div class="card wide"><h2>Coffee (Karnataka)</h2>'+staleNote(C);
   if(cd){var rk=cd.raw_karnataka,hc=H.coffee||[];
     html+='<div class="two"><div><p class="src">Rupees per 50 kg bag, as on '+esc(d(rk.as_on))+'. Source: <a href="'+esc(C.url)+'" target="_blank" rel="noopener">Coffee Board of India, Daily Coffee Market Report</a> of '+esc(d(cd.report_date))+'.</p><table><thead><tr><th>Type</th><th class="n">Price range</th><th class="n">Change</th><th class="n sp">90 days</th></tr></thead><tbody>';
-    COFFEE.forEach(function(t){var o=rk.prices[t[0]];if(!o)return;var key=function(r){return mid(r[t[0]])};var p1=prevRec(hc,rk.as_on,key),p30=prevRec(hc,rk.as_on,key,30);
-      html+='<tr><td class="k">'+t[1]+'</td><td class="n"><span class="big">'+inr(o.low)+'–'+n(o.high)+'</span></td><td class="n">'+(p1?chg(mid(o),key(p1),'since '+ds(p1.date)):'')+(p30?'<br>'+chg(mid(o),key(p30),'in 30 days'):'')+'</td><td class="n sp">'+spark(hc,key)+'</td></tr>';
+    var ps={h:T.picCoffee,u:T.picPer50,d:d(rk.as_on),r:[]};pic.push(ps);
+    COFFEE.forEach(function(t){var o=rk.prices[t[0]];if(!o)return;var key=function(r){return mid(r[t[0]])};var p1=prevRec(hc,rk.as_on,key),p30=prevRec(hc,rk.as_on,key,30);var py=yearRec(hc,rk.as_on,key),oy=py&&py[t[0]];
+      cur[t[0]]={d:rk.as_on,v:mid(o)};lab[t[0]]=t[1];ps.r.push([t[1],inr(o.low)+'–'+n(o.high)]);
+      html+='<tr'+(oy?' class="hy"':'')+'><td class="k">'+t[1]+'</td><td class="n"><span class="big">'+inr(o.low)+'–'+n(o.high)+'</span></td><td class="n">'+(p1?chg(mid(o),key(p1),'since '+ds(p1.date)):'')+(p30?'<br>'+chg(mid(o),key(p30),'in 30 days'):'')+'</td><td class="n sp">'+spark(hc,key)+'</td></tr>'+(oy?'<tr class="ya"><td colspan="4">'+ya(inr(oy.low)+'–'+n(oy.high),py.date,mid(o),mid(oy))+'</td></tr>':'');
       share.push(t[1]+': '+inr(o.low)+'–'+n(o.high)+' per 50 kg');});
     html+='</tbody></table></div>';
     share[share.length-4]='☕ Coffee, Karnataka, '+d(rk.as_on)+' (Coffee Board)\n'+share[share.length-4];
@@ -116,17 +212,20 @@ function render(P,H){
   html+='<div class="card"><h2>Black pepper</h2>'+staleNote(Pp);
   if(pd){html+='<p class="src">Rupees per kg. Source: <a href="'+esc(Pp.url)+'" target="_blank" rel="noopener">Spices Board of India, current market prices</a>, which credits each figure to the market’s own report'+(pd.markets.some(function(m){return m.market==='Sirsi'})?' (IPSTA for Kochi, the APMC for Sirsi)':' (IPSTA for Kochi)')+'.</p><table><thead><tr><th>Market</th><th class="n">Price</th><th class="n">Change</th></tr></thead><tbody>';
     share.push('🌶 Pepper (Spices Board)');
-    pd.markets.forEach(function(m){var k=(m.market+(m.grade?'_'+m.grade:'')).toLowerCase();var key=function(r){return r[k]};var p1=prevRec(hp,m.date,key);var mk=m.market==='Cochin'?'Kochi':m.market;var label=mk+(m.grade?', '+m.grade.toLowerCase():'');
-      html+='<tr><td class="k">'+esc(label)+'<br><span class="src">'+esc(d(m.date))+'</span></td><td class="n"><span class="big">'+inr(m.avg)+'</span></td><td class="n">'+(p1?chg(m.avg,key(p1),'since '+ds(p1.date)):'')+spark(hp,key)+'</td></tr>';
+    var pp={h:T.picPepper,u:T.picPerKg,d:pd.markets.every(function(m){return m.date===pd.markets[0].date})&&pd.markets[0]?d(pd.markets[0].date):'',r:[]};pic.push(pp);
+    pd.markets.forEach(function(m){var k=(m.market+(m.grade?'_'+m.grade:'')).toLowerCase();var key=function(r){return r[k]};var p1=prevRec(hp,m.date,key),py=yearRec(hp,m.date,key);var mk=m.market==='Cochin'?'Kochi':m.market;var label=mk+(m.grade?', '+m.grade.toLowerCase():'');
+      if(m.avg!=null){cur[k]={d:m.date,v:m.avg};lab[k]=T.visitPepper.replace('{m}',label);pp.r.push([label+(pp.d?'':' ('+d(m.date)+')'),inr(m.avg)])}
+      html+='<tr'+(py?' class="hy"':'')+'><td class="k">'+esc(label)+'<br><span class="src">'+esc(d(m.date))+'</span></td><td class="n"><span class="big">'+inr(m.avg)+'</span></td><td class="n">'+(p1?chg(m.avg,key(p1),'since '+ds(p1.date)):'')+spark(hp,key)+'</td></tr>'+(py?'<tr class="ya"><td colspan="3">'+ya(inr(key(py)),py.date,m.avg,key(py))+'</td></tr>':'');
       share.push(label+': '+inr(m.avg)+'/kg ('+d(m.date)+')');});
     html+='</tbody></table>';}
   html+='</div>';
   // cardamom
   var K=S.cardamom,kd=K&&K.data,hk=H.cardamom||[];
   html+='<div class="card"><h2>Small cardamom</h2>'+staleNote(K);
-  if(kd){var key=function(r){return r.weighted_average};var p1=prevRec(hk,kd.date,key),p30=prevRec(hk,kd.date,key,30);
+  if(kd){var key=function(r){return r.weighted_average};var p1=prevRec(hk,kd.date,key),p30=prevRec(hk,kd.date,key,30),py=yearRec(hk,kd.date,key);
+    if(kd.weighted_average!=null){cur.cardamom={d:kd.date,v:kd.weighted_average};lab.cardamom=T.visitCard;pic.push({h:T.picCard,u:T.picPerKg,d:d(kd.date),r:[[T.picAvg,inr(kd.weighted_average)]]})}
     html+='<p class="src">Rupees per kg, e-auctions of '+esc(d(kd.date))+'. Source: <a href="'+esc(K.url)+'" target="_blank" rel="noopener">Spices Board of India, daily auction prices</a>.</p>';
-    html+='<p><span class="big">'+inr(kd.weighted_average)+'</span> average '+(p1?chg(kd.weighted_average,key(p1),'since '+ds(p1.date)):'')+(p30?' '+chg(kd.weighted_average,key(p30),'in 30 days'):'')+'</p>'+spark(hk,key);
+    html+='<p><span class="big">'+inr(kd.weighted_average)+'</span> average '+(p1?chg(kd.weighted_average,key(p1),'since '+ds(p1.date)):'')+(p30?' '+chg(kd.weighted_average,key(p30),'in 30 days'):'')+'</p>'+(py?'<p class="ya">'+ya(inr(key(py)),py.date,kd.weighted_average,key(py))+'</p>':'')+spark(hk,key);
     html+='<table><thead><tr><th>Auction</th><th class="n">Average</th><th class="n">Highest</th><th class="n">Sold</th></tr></thead><tbody>';
     kd.auctions.forEach(function(a){html+='<tr><td>'+esc(a.auctioneer)+'</td><td class="n">'+inr(a.avg)+'</td><td class="n">'+inr(a.max)+'</td><td class="n">'+n(Math.round(a.sold_kg||0))+' kg</td></tr>'});
     html+='</tbody></table>';
@@ -135,7 +234,13 @@ function render(P,H){
   g.innerHTML=html;
   $('egmp-upd').textContent='Last checked '+dt(P.generated)+'. Checked at 9 am and 6 pm IST.';
   share.push('','Not a price quote. Prices can be wrong or out of date: confirm with the Coffee Board / Spices Board and your buyer before you trade. Endemic Greens accepts no liability for any loss.','Full table, sources and past year: https://endemicgreens.com'+location.pathname);
+  share[share.length-1]+='?utm_source=whatsapp&utm_medium=share';
   $('egmp-wa').href='https://wa.me/?text='+encodeURIComponent(share.join('\n'));
+  try{visit(cur,lab)}catch(e){}
+  var ttl=root.querySelector('.ttl'),path=location.pathname.replace(/\/+$/,''),pb=$('egmp-pic');ttl=ttl?ttl.textContent:'';
+  PIC={title:ttl,secs:pic.filter(function(s){return s.r.length}),url:'endemicgreens.com'+path,text:ttl+'. '+T.picNote+'. https://endemicgreens.com'+path,day:(P.generated||'').slice(0,10)};
+  if(pb){pb.disabled=!PIC.secs.length;pb.onclick=sharePic}
+  if(root.lang==='kn')picFonts();
   chart(H);
 }
 
@@ -170,10 +275,11 @@ function chart(H){
   draw();
 }
 
+try{pests()}catch(e){}
 function get(u){return fetch(BASE+u+'?t='+Math.floor(Date.now()/600000),{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
 Promise.all([get('prices.json'),get('history.json').catch(function(){return {}})]).then(function(x){render(x[0],x[1])}).catch(function(){
   $('egmp-grid').innerHTML='<p class="err">The price data could not be loaded just now. The figures come from the <a href="https://coffeeboard.gov.in/Market_Info.aspx" target="_blank" rel="noopener">Coffee Board of India</a> and the <a href="https://www.indianspices.com/marketing/price/domestic/daily-price.html" target="_blank" rel="noopener">Spices Board of India</a>, where you can read them directly.</p>';
-  $('egmp-upd').textContent='';$('egmp-wa').style.display='none';
+  $('egmp-upd').textContent='';$('egmp-wa').style.display='none';if($('egmp-pic'))$('egmp-pic').style.display='none';
 });
 })();
 </script>

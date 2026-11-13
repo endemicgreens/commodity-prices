@@ -18,6 +18,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.parse
 import urllib.request
 
@@ -178,9 +179,20 @@ def table_rows(html, after_marker=None):
     return rows
 
 
-def fetch_html(url, op=None):
+def fetch_html(url, op=None, tries=3, wait=30):
+    """Read a page, trying again after a pause if the connection fails or times out.
+    The Spices Board site often resets or times out (11-13 Nov 2026), so one failed try is not final."""
     op = op or opener()
-    return op.open(url, timeout=90).read().decode("utf-8", "replace")
+    last = None
+    for i in range(tries):
+        try:
+            return op.open(url, timeout=90).read().decode("utf-8", "replace")
+        except OSError as e:  # URLError, timeouts and connection resets are all OSError
+            last = e
+            print(f"try {i + 1} of {tries} failed for {url}: {e}", file=sys.stderr)
+            if i < tries - 1:
+                time.sleep(wait)
+    raise last
 
 
 def parse_cardamom(page):
