@@ -1,0 +1,17 @@
+name: probe-areca
+# One-off probe on a temporary branch (13 Nov 2026): which official areca price sources can a runner read? Reads only.
+on:
+  push:
+    branches: [probe-areca]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/probe_areca.py
