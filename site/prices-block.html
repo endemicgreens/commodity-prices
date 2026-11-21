@@ -62,6 +62,14 @@
 .egmp .yr li:last-child{border-bottom:0}
 .egmp .yr .nm{font-weight:600}
 .egmp .yr .fact{display:block;font-size:15px;line-height:1.5}
+.egmp .hv .cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px}
+.egmp .hv h3{margin:14px 0 4px;font-size:17px;font-weight:600;color:var(--fg)}
+.egmp .hv h3:first-child{margin-top:0}
+.egmp .hv .when{font-size:13.5px;color:var(--muted);margin:0 0 6px}
+.egmp .hv tr.now td{font-weight:600}
+.egmp .hv .cols>div{min-width:0}
+.egmp .hv th.n{white-space:normal}
+@media (max-width:1000px){.egmp .hv .cols{grid-template-columns:1fr;gap:18px}}
 @media (max-width:1000px){.egmp .two{grid-template-columns:1fr;gap:14px}}
 @media (max-width:760px){.egmp{font-size:16px}.egmp .grid,.egmp .more{grid-template-columns:1fr}.egmp .card{padding:16px}.egmp svg.spark{width:64px}.egmp table{font-size:14.5px}.egmp .sp{display:none}.egmp .chg{white-space:normal;display:inline-block;line-height:1.3}.egmp td.n{white-space:normal}.egmp .big{white-space:nowrap}.egmp .big{font-size:17px}.egmp th,.egmp td{padding:6px 3px}}
 </style>
@@ -75,6 +83,7 @@
 <p class="visit" id="egmp-visit" hidden></p>
 <div class="grid" id="egmp-grid"></div>
 <div class="chartbox yr" id="egmp-yr" hidden></div>
+<div class="chartbox hv" id="egmp-hv" hidden></div>
 <div class="chartbox"><h2>Prices over the past year</h2><div class="ctl" id="egmp-ctl" role="group" aria-label="Choose a price"></div><svg class="chart" id="egmp-chart" viewBox="0 0 900 300" role="img" aria-label="Price chart"></svg><p class="src" id="egmp-chartsrc"></p></div>
 <div class="more">
 <div><h2>Pest and disease advisories</h2><ul>
@@ -110,6 +119,30 @@ function staleNote(sec){if(!sec)return '<p class="stale">This source could not b
 
 /* v2 strings (a year ago, last visit, picture, this month's pests). Each is written once, here. {d} = a date, {m} = a month or a market. */
 var T={
+hvTitle:'Harvest season',
+hvLead:'How prices moved through last season’s harvest, and what the futures markets are trading for the coming delivery months. Both are published figures, set side by side; neither tells you what Karnataka prices will be.',
+hvLastTitle:'Last season ({y}), stage by stage',
+hvArabica:'Arabica',
+hvRobusta:'Robusta',
+hvPepper:'Black pepper',
+hvParch:'Parchment, ₹/50 kg',
+hvCherry:'Cherry, ₹/50 kg',
+hvPepperCol:'Kochi ungarbled, ₹/kg',
+hvStage:'Stage',
+hvStages:['Early','Peak','Late'],
+hvWhen:'Harvest: {s}',
+hvSoFar:'This season so far',
+hvLastNote:'Lowest and highest figures the Coffee Board (coffee) and the Spices Board (pepper) published in those months. Sources publish on working days only.',
+hvFutTitle:'Futures by delivery month',
+hvNY:'Arabica, New York',
+hvLon:'Robusta, London',
+hvDelivery:'Delivery',
+hvTraded:'Traded at, ₹/kg',
+hvVsFirst:'Against the first month',
+hvIn:'{s} harvest month',
+hvFutSrc:'As reported by the Coffee Board on {d}, at ₹{r} to the US dollar.',
+hvFutNote:'Futures are prices traders agree today on the New York and London exchanges for coffee delivered in a later month. They show what traders pay now for later delivery, not what Karnataka prices will be. Karnataka prices tend to follow them but also depend on the harvest, quality and the rupee.',
+monthsShort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 yrTitle:'The past year in brief',
 yrLow:'Lowest since {d}.',
 yrHigh:'Highest since {d}.',
@@ -258,6 +291,7 @@ function render(P,H){
   if(pb){pb.disabled=!PIC.secs.length;pb.onclick=sharePic}
   if(root.lang==='kn')picFonts();
   try{yr(H)}catch(e){}
+  try{hv(P,H)}catch(e){}
   chart(H);
 }
 
@@ -291,6 +325,37 @@ function yr(H){var el=$('egmp-yr');if(!el)return;var li='';
     if(f.run)bits.push((f.run[0]<0?T.yrDown:T.yrUp).replace('{n}',f.run[1]).replace('{d}',d(f.run[2])));
     li+='<li><span class="nm">'+esc(o[0])+'</span> '+inr(f.v)+' <span class="src">('+esc(d(f.d))+')</span>'+bits.map(function(b){return '<span class="fact">'+esc(b)+'</span>'}).join('')+'</li>'});
   if(!li)return;el.innerHTML='<h2>'+esc(T.yrTitle)+'</h2><ul>'+li+'</ul><p class="src">'+esc(T.yrNote)+'</p>';el.hidden=false}
+
+/* Harvest season: last season's published prices stage by stage, and the futures the Coffee Board reports for each delivery month. Stage months are set here. Nothing is estimated. */
+var HV=[
+  {h:T.hvArabica,src:'coffee',cols:[['arabica_parchment',T.hvParch],['arabica_cherry',T.hvCherry]],st:[[11],[12,1],[2]],fut:'arabica_new_york'},
+  {h:T.hvRobusta,src:'coffee',cols:[['robusta_parchment',T.hvParch],['robusta_cherry',T.hvCherry]],st:[[12],[1,2],[3]],fut:'robusta_europe'},
+  {h:T.hvPepper,src:'pepper',cols:[['cochin_ungarbled',T.hvPepperCol]],st:[[12],[1,2],[3]]}];
+function mname(m){return T.monthsShort[m-1]}
+function hvSpan(ms,y0){/* months of one stage, in a season that starts in November of y0 */
+  return ms.map(function(m){var y=m>=10?y0:y0+1;return y+'-'+(m<10?'0':'')+m})}
+function hvRange(rows,ym,key){var lo=null,hi=null,n=0;rows.forEach(function(r){if(ym.indexOf(r.date.slice(0,7))<0)return;var v=r[key];if(v==null)return;var a=typeof v==='object'?v.low:v,b=typeof v==='object'?v.high:v;if(a==null||b==null)return;n++;if(lo==null||a<lo)lo=a;if(hi==null||b>hi)hi=b});return n?[lo,hi]:null}
+function hvStageLabel(i,ms,y0){var a=hvSpan(ms,y0),f=a[0].split('-'),l=a[a.length-1].split('-');var txt=a.length<2?mname(+f[1])+' '+f[0]:f[0]===l[0]?mname(+f[1])+'–'+mname(+l[1])+' '+f[0]:mname(+f[1])+' '+f[0]+'–'+mname(+l[1])+' '+l[0];return T.hvStages[i]+' ('+txt+')'}
+function hv(P,H){var el=$('egmp-hv');if(!el)return;
+  var today=(P.generated||'').slice(0,10);if(!today)return;var ty=+today.slice(0,4),tm=+today.slice(5,7);
+  var cur=tm>=10?ty:tm<=5?ty-1:null,last=(cur!=null?cur:ty-1)-1;if(cur==null)last=ty-1;/* season = November to March, named by the year it starts */
+  var left='',any=false;
+  HV.forEach(function(c){var rows=H[c.src]||[];var head='<tr><th>'+esc(T.hvStage)+'</th>'+c.cols.map(function(k){return '<th class="n">'+esc(k[1])+'</th>'}).join('')+'</tr>',body='',got=false;
+    c.st.forEach(function(ms,i){var cells=c.cols.map(function(k){var r=hvRange(rows,hvSpan(ms,last),k[0]);if(r)got=true;return '<td class="n">'+(r?inr(r[0])+(r[1]!==r[0]?'–<wbr>'+n(r[1]):''):'–')+'</td>'}).join('');body+='<tr><td>'+esc(hvStageLabel(i,ms,last))+'</td>'+cells+'</tr>'});
+    if(cur!=null){var allMs=[].concat.apply([],c.st),ym=hvSpan(allMs,cur).filter(function(x){return x<=today.slice(0,7)});var cells=c.cols.map(function(k){var r=hvRange(rows,ym,k[0]);return r?inr(r[0])+(r[1]!==r[0]?'–<wbr>'+n(r[1]):''):null});
+      if(cells.some(function(x){return x}))body+='<tr class="now"><td>'+esc(T.hvSoFar)+'</td>'+cells.map(function(x){return '<td class="n">'+(x||'–')+'</td>'}).join('')+'</tr>'}
+    if(!got)return;any=true;
+    left+='<h3>'+esc(c.h)+'</h3><p class="when">'+esc(T.hvWhen.replace('{s}',c.st.map(function(ms,i){var a=ms.map(mname);return T.hvStages[i].toLowerCase()+' '+(a.length>1?a[0]+'–'+a[a.length-1]:a[0])}).join(' · ')))+'</p><table><thead>'+head+'</thead><tbody>'+body+'</tbody></table>'});
+  if(!any)return;
+  var right='',F=((P.sections||{}).coffee||{}).data;F=F&&F.futures;
+  if(F){HV.forEach(function(c){var L=c.fut&&F[c.fut];if(!L||!L.length)return;var base=L[0].inr_kg;
+      right+='<h3>'+esc(c.fut==='arabica_new_york'?T.hvNY:T.hvLon)+'</h3><table><thead><tr><th>'+esc(T.hvDelivery)+'</th><th class="n">'+esc(T.hvTraded)+'</th><th class="n">'+esc(T.hvVsFirst)+'</th></tr></thead><tbody>';
+      L.forEach(function(a,i){var parts=String(a.month).split('-'),mi=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(parts[0])+1,stg='';
+        c.st.forEach(function(ms,k){if(mi&&ms.indexOf(mi)>=0)stg=T.hvStages[k].toLowerCase()});
+        right+='<tr><td class="m">'+esc(mi?mname(mi)+' '+parts[1]:a.month)+(stg?'<br><span class="src">'+esc(T.hvIn.replace('{s}',stg))+'</span>':'')+'</td><td class="n">'+inr(a.inr_kg,2)+'</td><td class="n">'+(i?chg(a.inr_kg,base,''):'')+'</td></tr>'});
+      right+='</tbody></table>'});
+    if(right)right+='<p class="src">'+esc(T.hvFutSrc.replace('{d}',d(F.as_on)).replace('{r}',P.sections.coffee.data.inr_per_usd?n(P.sections.coffee.data.inr_per_usd,2):''))+'</p>'}
+  el.innerHTML='<h2>'+esc(T.hvTitle)+'</h2><p class="lead" style="margin-bottom:14px">'+esc(T.hvLead)+'</p><div class="cols"><div><p class="sub" style="margin-top:0">'+esc(T.hvLastTitle.replace('{y}',last+'–'+String(last+1).slice(2)))+'</p>'+left+'<p class="src">'+esc(T.hvLastNote)+'</p></div>'+(right?'<div><p class="sub" style="margin-top:0">'+esc(T.hvFutTitle)+'</p>'+right+'<p class="src">'+esc(T.hvFutNote)+'</p></div>':'')+'</div>';el.hidden=false}
 
 function chart(H){
   var opts=SER;
