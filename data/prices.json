@@ -4,146 +4,146 @@
    "source": "Coffee Board of India, Daily Coffee Market Report",
    "url": "https://coffeeboard.gov.in/Market_Info.aspx",
    "data": {
-    "report_date": "2026-11-20",
+    "report_date": "2026-11-23",
     "raw_karnataka": {
-     "as_on": "2026-11-19",
+     "as_on": "2026-11-20",
      "unit": "Rs per 50 kg",
      "prices": {
       "arabica_parchment": {
-       "low": 22500.0,
-       "high": 23100.0
+       "low": 21750.0,
+       "high": 22500.0
       },
       "arabica_cherry": {
-       "low": 12000.0,
-       "high": 13400.0
+       "low": 10500.0,
+       "high": 12000.0
       },
       "robusta_parchment": {
-       "low": 17200.0,
-       "high": 17700.0
+       "low": 16500.0,
+       "high": 17000.0
       },
       "robusta_cherry": {
-       "low": 9700.0,
-       "high": 10500.0
+       "low": 9250.0,
+       "high": 10000.0
       }
      }
     },
     "futures": {
-     "as_on": "2026-11-19",
+     "as_on": "2026-11-20",
      "arabica_new_york": [
       {
        "month": "Dec-2026",
-       "us_cents_lb": 282.05,
-       "inr_kg": 579.28
+       "us_cents_lb": 274.85,
+       "inr_kg": 563.4
       },
       {
        "month": "Mar-2027",
-       "us_cents_lb": 276.0,
-       "inr_kg": 566.86
+       "us_cents_lb": 268.5,
+       "inr_kg": 550.39
       },
       {
        "month": "May-2027",
-       "us_cents_lb": 268.2,
-       "inr_kg": 550.84
+       "us_cents_lb": 262.1,
+       "inr_kg": 537.27
       }
      ],
      "robusta_europe": [
       {
        "month": "Nov-2026",
-       "usd_tonne": 2998.0,
-       "us_cents_lb": 135.99,
-       "inr_kg": 279.29
+       "usd_tonne": 2901.0,
+       "us_cents_lb": 131.59,
+       "inr_kg": 269.73
       },
       {
        "month": "Jan-2027",
-       "usd_tonne": 2978.0,
-       "us_cents_lb": 135.08,
-       "inr_kg": 277.43
+       "usd_tonne": 2881.0,
+       "us_cents_lb": 130.68,
+       "inr_kg": 267.88
       },
       {
        "month": "Mar-2027",
-       "usd_tonne": 2941.0,
-       "us_cents_lb": 133.4,
-       "inr_kg": 273.98
+       "usd_tonne": 2865.0,
+       "us_cents_lb": 129.95,
+       "inr_kg": 266.39
       }
      ]
     },
-    "inr_per_usd": 93.16
+    "inr_per_usd": 92.98
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-23T10:13+05:30",
-   "last_checked": "2026-11-23T10:13+05:30"
+   "last_success": "2026-11-23T19:24+05:30",
+   "last_checked": "2026-11-23T19:24+05:30"
   },
   "cardamom": {
    "source": "Spices Board of India, daily e-auction prices of small cardamom",
    "url": "https://www.indianspices.com/marketing/price/domestic/daily-price.html",
    "data": {
-    "date": "2026-11-21",
+    "date": "2026-11-23",
     "unit": "Rs per kg",
     "auctions": [
      {
-      "date": "2026-11-21",
-      "auctioneer": "Mas Enterprises, Vandanmettu",
-      "lots": 244.0,
-      "arrived_kg": 84401.2,
-      "sold_kg": 83211.7,
-      "max": 3906.0,
-      "min": 2517.0,
-      "avg": 2911.56
+      "date": "2026-11-23",
+      "auctioneer": "South Indian Green Cardamom Company Ltd, Kochi",
+      "lots": 208.0,
+      "arrived_kg": 59661.0,
+      "sold_kg": 57127.9,
+      "max": 3328.0,
+      "min": 2486.0,
+      "avg": 2847.38
      },
      {
-      "date": "2026-11-21",
-      "auctioneer": "Header Systems (India) Limited, Nedumkandam",
-      "lots": 250.0,
-      "arrived_kg": 80012.9,
-      "sold_kg": 72264.1,
-      "max": 3402.0,
-      "min": 2527.0,
-      "avg": 2877.07
+      "date": "2026-11-23",
+      "auctioneer": "Cardamom Planters' Association, Santhanpara",
+      "lots": 81.0,
+      "arrived_kg": 16809.3,
+      "sold_kg": 15195.2,
+      "max": 3125.0,
+      "min": 2592.0,
+      "avg": 2745.83
      }
     ],
-    "weighted_average": 2895.53
+    "weighted_average": 2826.04
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-23T10:13+05:30",
-   "last_checked": "2026-11-23T10:13+05:30"
+   "last_success": "2026-11-23T19:24+05:30",
+   "last_checked": "2026-11-23T19:24+05:30"
   },
   "pepper": {
    "source": "Spices Board of India, current market price of key spices",
    "url": "https://www.indianspices.com/marketing/price/domestic/current-market-price.html",
    "data": {
-    "date": "2026-11-18",
+    "date": "2026-11-23",
     "unit": "Rs per kg",
     "markets": [
      {
-      "date": "2026-11-18",
+      "date": "2026-11-23",
       "market": "Cochin",
       "state": "Kerala",
       "grade": "Garbled",
       "source": "IPSTA",
       "min": null,
       "max": null,
-      "avg": 774.0
+      "avg": 775.0
      },
      {
-      "date": "2026-11-18",
+      "date": "2026-11-23",
       "market": "Cochin",
       "state": "Kerala",
       "grade": "Ungarbled",
       "source": "IPSTA",
       "min": null,
       "max": null,
-      "avg": 754.0
+      "avg": 755.0
      }
     ]
    },
    "status": "ok",
    "error": null,
-   "last_success": "2026-11-23T10:13+05:30",
-   "last_checked": "2026-11-23T10:13+05:30"
+   "last_success": "2026-11-23T19:24+05:30",
+   "last_checked": "2026-11-23T19:24+05:30"
   }
  },
- "generated": "2026-11-23T10:13+05:30",
+ "generated": "2026-11-23T19:24+05:30",
  "note": "Figures are copied from the official sources named in each section, with their dates. Endemic Greens does not adjust, average (except the sold-quantity-weighted cardamom figure) or forecast them."
 }
